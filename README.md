@@ -44,3 +44,11 @@ v1.5 로컬 기준 8 tests PASS. v2.0은 새 법령변경·헌재 계층에 대�
 - Google Jules — independent audit slot; completion is recorded only after a verifiable audit
 
 See [CONTRIBUTORS.md](CONTRIBUTORS.md).
+
+
+## 🌐 Web demo
+사법정책 연구도구의 성격이 드러나도록 네이비·아이보리 기반의 공개 데모 UI를 제공합니다.
+
+- [Demo source](docs/index.html)
+- GitHub Pages를 `main /docs`로 활성화하면 공개 URL로 바로 사용할 수 있습니다.
+- 화면의 수치는 현재 합성 fixture 기반 검증 결과이며 실제 법원·사건 성능을 의미하지 않습니다.
