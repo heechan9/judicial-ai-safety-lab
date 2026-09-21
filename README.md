@@ -36,3 +36,11 @@ v1.5 로컬 기준 8 tests PASS. v2.0은 새 법령변경·헌재 계층에 대�
 
 ## 데이터 경계
 합성 fixture와 연구용 위험가중치를 사용합니다. 공식 데이터 connector는 read-only 원칙이며 인증키를 저장소에 커밋하지 않습니다. AI가 법적 판단을 확정하지 않고 고위험·불확실·헌법상태 영향 결과를 사람에게 넘깁니다.
+
+
+## Contributors & verification
+- 최희찬 — research lead / human final decision
+- OpenAI ChatGPT / Codex — AI-assisted implementation, tests and documentation
+- Google Jules — independent audit slot; completion is recorded only after a verifiable audit
+
+See [CONTRIBUTORS.md](CONTRIBUTORS.md).
