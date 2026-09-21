@@ -1,0 +1,1 @@
+const tabs=document.querySelectorAll("[data-tab]"),views=document.querySelectorAll("[data-view]");tabs.forEach(b=>b.onclick=()=>{tabs.forEach(x=>x.classList.remove("active"));b.classList.add("active");views.forEach(v=>v.classList.toggle("hidden",v.dataset.view!==b.dataset.tab));});
