@@ -1,0 +1,6 @@
+[
+{"source_id":"COURT-001","institution":"court","source_type":"precedent","title":"합성 판례 A","version":"2026-09-01","status":"effective","checksum":"demo-court-a"},
+{"source_id":"MOLEG-001","institution":"moleg","source_type":"statute","title":"합성 법령 A","version":"2026-09-10","status":"effective","checksum":"demo-law-a"},
+{"source_id":"CCOURT-001","institution":"ccourt","source_type":"constitutional_decision","title":"합성 헌재 결정 A","version":"2026-08-20","status":"effective","constitutional_status":"constitutional_nonconformity","checksum":"demo-ccourt-a"},
+{"source_id":"ASSEMBLY-001","institution":"assembly","source_type":"bill","title":"합성 일부개정법률안 A","version":"2026-09-20","status":"committee","checksum":"demo-bill-a"}
+]
