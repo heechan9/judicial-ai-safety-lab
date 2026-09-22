@@ -1,1 +1,3 @@
-const tabs=document.querySelectorAll("[data-tab]"),views=document.querySelectorAll("[data-view]");tabs.forEach(b=>b.onclick=()=>{tabs.forEach(x=>x.classList.remove("active"));b.classList.add("active");views.forEach(v=>v.classList.toggle("hidden",v.dataset.view!==b.dataset.tab));});
+const tabs=document.querySelectorAll("[data-tab]"),views=document.querySelectorAll("[data-view]");
+function activate(tab){tabs.forEach(x=>{const on=x===tab;x.classList.toggle("active",on);x.setAttribute("aria-selected",String(on));});views.forEach(v=>v.classList.toggle("hidden",v.dataset.view!==tab.dataset.tab));}
+tabs.forEach((b,i)=>{b.onclick=()=>activate(b);b.onkeydown=e=>{if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();const d=e.key==="ArrowRight"?1:-1;const n=tabs[(i+d+tabs.length)%tabs.length];n.focus();activate(n);}}});
