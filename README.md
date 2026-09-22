@@ -1,4 +1,4 @@
-# Judicial AI Safety Lab v2.5
+# Judicial AI Safety Lab v3.0
 
 대한민국 사법·법률 분야 생성형 AI를 **위험평가 → 동일조건 검증 → 적대적 테스트 → 독립검증 → 법적 근거 변경감지 → 지속 모니터링 → 인간검토** 순서로 점검하는 연구용 PoC입니다.
 
@@ -10,7 +10,7 @@
 - **AdversarialAI Security** — clean/attack, ASR, independent rerun/evidence integrity
 - **FabGuard AI** — frozen baseline, drift, prioritized human review/audit governance
 
-## v2.0 verified engine + v2.5 public-first UI
+## v3.0 — evidence metadata + legislative lifecycle
 - v1.5 전체 파이프라인 유지
 - 법제처 현행법령 connector contract
 - **법령 변경이력 `lsHstInf` + 조문별 변경이력 `lsJoHstInf`**
@@ -63,3 +63,11 @@ Anthropic Claude의 독립 UI/UX·정보구조 감사 finding을 검토해 v2.5 
 
 ### v2.5 public-first design principle
 첫 화면은 전문 지표보다 **왜 사람 확인이 필요한지**를 쉬운 한국어와 시각적 흐름으로 먼저 설명합니다. Risk/ASR/hash/manifest 등 전문정보는 단계적으로 펼쳐보도록 분리했습니다.
+
+
+### v3.0 additions
+- Evidence metadata schema: `evaluated_at`, `fixture_version`, `evaluation_version`, commit SHA
+- Research risk thresholds disclosed in UI: LOW 0–29.99 / WATCH 30–59.99 / HIGH 60–100 (not an official judicial standard)
+- 2D risk-weight visualization and expanded glossary
+- National Assembly legislative lifecycle contract with strict `not effective law` guard for non-effective bill states
+- Assembly live adapter remains pending until an official endpoint/schema is pinned and verified
