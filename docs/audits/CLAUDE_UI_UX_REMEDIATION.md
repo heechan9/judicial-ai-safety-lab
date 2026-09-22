@@ -14,7 +14,7 @@ Independent UI/UX and information-architecture review supplied by Anthropic Clau
 - M3 stress and adversarial tests needed clearer separation
 - M4 methodology-to-UI mapping needed improvement
 
-## v2.1 remediation
+## v2.5 remediation
 - Added inline tooltips and glossary
 - Added 0–100 research-risk scale and weights; explicitly not an official judicial threshold
 - Added Source → J005 → Regression FAIL → Human Review trace
@@ -32,4 +32,7 @@ No arbitrary pass-rate threshold was added. Claude's illustrative 60% threshold 
 No fabricated verification timestamp, fixture version, or independent-verification claim was added.
 
 ## Next audit
-Claude should re-review the live v2.1 demo after GitHub Pages redeploys. Google Jules remains the separate code/evidence audit track.
+Claude should re-review the live v2.5 demo after GitHub Pages redeploys. Google Jules remains the separate code/evidence audit track.
+
+## Public-first refinement
+After the initial remediation, the human research lead clarified the primary UX objective: a non-technical visitor should understand the purpose and current decision before seeing technical metrics. v2.5 therefore adds a plain-language visual flow (legal-source change → retest → issue found → human review), moves technical metrics behind progressive disclosure, and translates connector/test states into plain Korean while preserving exact technical labels as secondary text.
