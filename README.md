@@ -1,4 +1,4 @@
-# Judicial AI Safety Lab v3.0
+# Judicial AI Safety Lab v3.5
 
 대한민국 사법·법률 분야 생성형 AI를 **위험평가 → 동일조건 검증 → 적대적 테스트 → 독립검증 → 법적 근거 변경감지 → 지속 모니터링 → 인간검토** 순서로 점검하는 연구용 PoC입니다.
 
@@ -71,3 +71,13 @@ Anthropic Claude의 독립 UI/UX·정보구조 감사 finding을 검토해 v2.5 
 - 2D risk-weight visualization and expanded glossary
 - National Assembly legislative lifecycle contract with strict `not effective law` guard for non-effective bill states
 - Assembly live adapter remains pending until an official endpoint/schema is pinned and verified
+
+
+## v3.5 implementation in progress
+- Added governance engine for evidence uncertainty states: SUPPORTED / UNCERTAIN / CONFLICTING / CHANGED / UNSUPPORTED.
+- Added dual legal-evidence + technical-safety review routing.
+- Added targeted change-impact/regression feedback loop.
+- Added minimal rights/data review flags for personal-data, purpose-basis, cross-border and TDM status.
+- Added second-look challenge output for omitted/conflicting/changed sources and technical findings.
+- Added plain-language explanation mapping for public-facing UI.
+- New v3.5 tests are committed; full-suite verification is still pending, so v3.5 is not yet labelled verified.
