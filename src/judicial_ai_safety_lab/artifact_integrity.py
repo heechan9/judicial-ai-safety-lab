@@ -3,7 +3,7 @@
 PASS means files match the manifest. It does not authenticate the operator,
 rerun evaluation, or establish independent verification.
 """
-import hashlib, json, re
+import hashlib, json, re, math
 from pathlib import Path, PurePosixPath
 
 SHA256_RE=re.compile(r"^[0-9a-f]{64}$")
@@ -14,12 +14,12 @@ def _digest(path):
         for block in iter(lambda:stream.read(1024*1024),b""): h.update(block)
     return h.hexdigest()
 
-def audit_bundle(directory):
+def _unique_pairs(pairs):\n    out={}\n    for key,value in pairs:\n        if key in out: raise ValueError("duplicate JSON key")\n        out[key]=value\n    return out\n\ndef _reject_constant(value):\n    raise ValueError("non-finite JSON value")\n\ndef audit_bundle(directory):
     root=Path(directory)
     if root.is_symlink() or not root.is_dir(): raise ValueError("bundle must be a real directory")
     root=root.resolve(); manifest_path=root/"manifest.json"
     if not manifest_path.is_file(): raise ValueError("missing manifest.json")
-    manifest=json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest=json.loads(manifest_path.read_text(encoding="utf-8"), object_pairs_hook=_unique_pairs, parse_constant=_reject_constant)
     expected=manifest.get("artifact_sha256")
     if not isinstance(expected,dict) or not expected: raise ValueError("missing artifact manifest")
     for name,value in expected.items():
