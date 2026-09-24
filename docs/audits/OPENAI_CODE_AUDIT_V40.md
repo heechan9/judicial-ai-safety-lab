@@ -31,3 +31,7 @@ Scope: current repository code, tests, CI, and the cross-project methods ported 
 - Whether additional malformed-input/property-based testing is warranted.
 
 External Jules and Claude request briefs are stored beside this audit.
+
+
+## Final CI evidence
+GitHub Actions run on the hardened v4.0 code completed successfully: **33 tests, 0 failures, 0 errors**. JUnit evidence is retained by the CI workflow as `pytest-report`.
