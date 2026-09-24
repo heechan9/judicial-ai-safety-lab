@@ -73,11 +73,13 @@ Anthropic Claude의 독립 UI/UX·정보구조 감사 finding을 검토해 v2.5 
 - Assembly live adapter remains pending until an official endpoint/schema is pinned and verified
 
 
-## v3.5 implementation in progress
+## v3.5 — governance layer verified
 - Added governance engine for evidence uncertainty states: SUPPORTED / UNCERTAIN / CONFLICTING / CHANGED / UNSUPPORTED.
 - Added dual legal-evidence + technical-safety review routing.
 - Added targeted change-impact/regression feedback loop.
 - Added minimal rights/data review flags for personal-data, purpose-basis, cross-border and TDM status.
 - Added second-look challenge output for omitted/conflicting/changed sources and technical findings.
 - Added plain-language explanation mapping for public-facing UI.
-- New v3.5 tests are committed; full-suite verification is still pending, so v3.5 is not yet labelled verified.
+- Full reconstructed repository test suite: **22/22 PASS** after v3.5 integration.
+
+- v3.5 verification scope: source/test files were re-fetched from GitHub and executed in a clean local reconstruction with PYTHONPATH=src.
