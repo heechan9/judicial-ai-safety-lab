@@ -7,3 +7,6 @@
 
 /* v3.0 compact 2D risk-weight visualization */
 .weights{display:grid;gap:8px;margin-top:10px}.weights>div{display:grid;grid-template-columns:82px 1fr;align-items:center;gap:8px}.weights span{font:12px system-ui;color:#5d5b56}.weights b{position:relative;display:block;min-height:22px;padding:3px 7px;font:700 11px system-ui;color:var(--navy);background:linear-gradient(90deg,#d9c69d var(--w),#eee8dc var(--w));border-radius:5px}
+
+/* v3.5 uncertainty states */
+.uncertainty-strip{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}.uncertainty-strip span{display:inline-flex;align-items:center;min-height:34px;padding:6px 10px;border:1px solid var(--line);border-radius:999px;background:#f8f4ec;font:700 12px system-ui;color:var(--navy)}
