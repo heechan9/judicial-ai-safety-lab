@@ -14,4 +14,13 @@ jobs:
         with:
           python-version: "3.11"
       - run: python -m pip install -e . pytest
-      - run: pytest -q
+      - id: tests
+        continue-on-error: true
+        run: pytest -q --junitxml=pytest.xml
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pytest-report
+          path: pytest.xml
+      - if: steps.tests.outcome != 'success'
+        run: exit 1
