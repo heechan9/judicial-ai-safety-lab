@@ -51,3 +51,21 @@ def test_governance_rejects_failure_outside_impact():
     import pytest
     with pytest.raises(ValueError):
         governance_loop(change_id="L",affected_scenarios=["J1"],failed_scenarios=["J2"])
+
+def test_quality_log_rejects_naive_time():
+    import pytest
+    with pytest.raises(ValueError):
+        create_record(record_id="Q2",requirement="time",expected="aware",observed="naive",
+            revision="a"*40,at="2026-09-25T00:00:00")
+
+def test_snapshot_rejects_absolute_path():
+    import pytest
+    bad={"repository":"x/y","revision":"a"*40,"checked_at":"2026-09-25",
+         "files":{"/abs.json":{"sha256":"b"*64,"role":"source"}}}
+    with pytest.raises(ValueError): validate_snapshot(bad)
+
+def test_bundle_rejects_duplicate_manifest_keys(tmp_path):
+    import pytest
+    (tmp_path/"a.txt").write_text("x",encoding="utf-8")
+    (tmp_path/"manifest.json").write_text('{"artifact_sha256":{"a.txt":"'+("a"*64)+'","a.txt":"'+("b"*64)+'"}}',encoding="utf-8")
+    with pytest.raises(ValueError): audit_bundle(tmp_path)
