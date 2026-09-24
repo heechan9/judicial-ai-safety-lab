@@ -10,7 +10,7 @@ def validate_snapshot(snapshot):
     if not SHA40.fullmatch(snapshot["revision"]): raise ValueError("revision must be full git SHA")
     if not isinstance(snapshot["files"],dict) or not snapshot["files"]: raise ValueError("snapshot files required")
     for path,meta in snapshot["files"].items():
-        if not isinstance(path,str) or not path or ".." in path.split("/"): raise ValueError("unsafe snapshot path")
+        if (not isinstance(path,str) or not path or path.startswith("/") or chr(92) in path or ":" in path or ".." in path.split("/")): raise ValueError("unsafe snapshot path")
         if not isinstance(meta,dict) or set(meta)!={"sha256","role"}: raise ValueError("file metadata schema mismatch")
         if not SHA64.fullmatch(meta["sha256"]): raise ValueError("invalid snapshot SHA256")
         if not isinstance(meta["role"],str) or not meta["role"]: raise ValueError("file role required")
