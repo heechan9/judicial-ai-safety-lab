@@ -17,7 +17,8 @@ class QualityRecord:
     history:list[dict]=field(default_factory=list)
 
 def _stamp(value:str)->str:
-    datetime.fromisoformat(value.replace("Z","+00:00"))
+    parsed=datetime.fromisoformat(value.replace("Z","+00:00"))
+    if parsed.utcoffset() is None: raise ValueError("timestamp must include timezone")
     return value
 
 def _revision(value:str)->str:
