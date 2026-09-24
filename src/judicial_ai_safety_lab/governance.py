@@ -1,9 +1,9 @@
-"""v3.5 governance and uncertainty guards.
+"""Governance, uncertainty, and second-look guards.
 
-Research prototype: these functions classify evidence state and route review.
-They do not decide legal validity or produce a legal judgment.
+Research prototype: classify evidence states and route human review.
+No function produces a final legal judgment.
 """
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass
 from typing import Iterable
 
 UNCERTAINTY_STATES={"SUPPORTED","UNCERTAIN","CONFLICTING","CHANGED","UNSUPPORTED"}
@@ -13,6 +13,7 @@ class EvidenceClaim:
     claim_id:str
     source_ids:tuple[str,...]=()
     source_supported:bool=True
+    uncertain:bool=False
     conflicting:bool=False
     changed:bool=False
     missing_evidence:bool=False
@@ -20,24 +21,22 @@ class EvidenceClaim:
     privacy_flags:tuple[str,...]=()
 
 def uncertainty_guard(claim:EvidenceClaim):
-    if claim.missing_evidence or not claim.source_supported:
-        state="UNSUPPORTED"
-    elif claim.conflicting:
-        state="CONFLICTING"
-    elif claim.changed:
-        state="CHANGED"
-    else:
-        state="SUPPORTED"
+    if claim.missing_evidence or not claim.source_supported: state="UNSUPPORTED"
+    elif claim.conflicting: state="CONFLICTING"
+    elif claim.changed: state="CHANGED"
+    elif claim.uncertain: state="UNCERTAIN"
+    else: state="SUPPORTED"
     return {
         "claim_id":claim.claim_id,
         "state":state,
         "requires_review":state!="SUPPORTED" or claim.technical_failure or bool(claim.privacy_flags),
         "reasons":[
-            *(["SOURCE_UNSUPPORTED"] if state=="UNSUPPORTED" else []),
-            *(["SOURCE_CONFLICT"] if state=="CONFLICTING" else []),
-            *(["SOURCE_CHANGED"] if state=="CHANGED" else []),
-            *(["TECHNICAL_FAILURE"] if claim.technical_failure else []),
-            *(["RIGHTS_DATA_REVIEW"] if claim.privacy_flags else []),
+            *([ "SOURCE_UNSUPPORTED" ] if state=="UNSUPPORTED" else []),
+            *([ "SOURCE_CONFLICT" ] if state=="CONFLICTING" else []),
+            *([ "SOURCE_CHANGED" ] if state=="CHANGED" else []),
+            *([ "SOURCE_UNCERTAIN" ] if state=="UNCERTAIN" else []),
+            *([ "TECHNICAL_FAILURE" ] if claim.technical_failure else []),
+            *([ "RIGHTS_DATA_REVIEW" ] if claim.privacy_flags else []),
         ],
     }
 
@@ -49,6 +48,8 @@ def dual_safety_guard(*, legal_ok:bool, technical_ok:bool):
 
 def governance_loop(*, change_id:str, affected_scenarios:Iterable[str], failed_scenarios:Iterable[str]):
     affected=list(dict.fromkeys(affected_scenarios)); failed=list(dict.fromkeys(failed_scenarios))
+    unexpected=[x for x in failed if x not in affected]
+    if unexpected: raise ValueError(f"failed scenarios outside impact set: {unexpected}")
     return {
       "change_id":change_id,
       "impact_analysis":{"affected_scenarios":affected,"count":len(affected)},
@@ -82,12 +83,10 @@ def second_look(*, provisional_decision_id:str, omitted_sources=(), conflicting_
     }
 
 def public_explanation(result):
-    state=result.get("state")
-    messages={
+    return {
       "SUPPORTED":"확인된 근거와 현재 평가가 서로 맞습니다.",
       "UNSUPPORTED":"필요한 근거가 충분히 확인되지 않았습니다.",
       "CONFLICTING":"서로 충돌하는 근거가 있어 사람이 확인해야 합니다.",
       "CHANGED":"참조한 법적 근거에 변경 신호가 있어 다시 확인해야 합니다.",
       "UNCERTAIN":"현재 정보만으로 확정하기 어려워 사람이 확인해야 합니다.",
-    }
-    return messages.get(state,"추가 확인이 필요한 평가 결과입니다.")
+    }.get(result.get("state"),"추가 확인이 필요한 평가 결과입니다.")
