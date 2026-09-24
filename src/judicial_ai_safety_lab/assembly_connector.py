@@ -1,8 +1,6 @@
-"""National Assembly connector contract — v3.0.
+"""National Assembly lifecycle contract.
 
-This module intentionally keeps the Assembly integration at a normalized
-contract boundary until an official endpoint/schema is pinned and verified.
-It models legislative lifecycle states without treating a bill as effective law.
+Non-effective legislative material is explicitly separated from effective law.
 """
 from .core import LegalSourceRecord
 
@@ -20,6 +18,8 @@ def normalize_bill_fixture(row):
 
 def lifecycle_guard(status):
     status=status.lower()
+    if status not in LEGISLATIVE_STATES:
+        raise ValueError(f"unsupported legislative state: {status}")
     return {
       "status":status,
       "is_effective_law":status=="effective",
