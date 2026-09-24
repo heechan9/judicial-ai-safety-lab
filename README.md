@@ -94,7 +94,7 @@ Anthropic Claude의 독립 UI/UX·정보구조 감사 finding을 검토해 v2.5 
 - UNCERTAIN state made reachable and tested separately from CONFLICTING / CHANGED / UNSUPPORTED.
 - Governance loop now rejects failed scenarios outside the affected set.
 - GitHub Actions CI added with retained JUnit artifact.
-- Latest verified CI on v4.0 code: **30/30 tests PASS**.
+- Latest verified CI on v4.0 code: **33/33 tests PASS**.
 
 External audit request files:
 - [Jules code audit request](docs/audits/JULES_CODE_AUDIT_REQUEST_V40.md)
