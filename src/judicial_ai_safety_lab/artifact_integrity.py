@@ -24,7 +24,7 @@ def audit_bundle(directory):
     if not isinstance(expected,dict) or not expected: raise ValueError("missing artifact manifest")
     for name,value in expected.items():
         p=PurePosixPath(name)
-        if p.is_absolute() or ".." in p.parts or "\" in name or ":" in name or p.as_posix()!=name:
+        if p.is_absolute() or ".." in p.parts or chr(92) in name or ":" in name or p.as_posix()!=name:
             raise ValueError("unsafe manifest path")
         if not isinstance(value,str) or not SHA256_RE.fullmatch(value): raise ValueError("invalid sha256")
     actual={}
