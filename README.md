@@ -1,4 +1,4 @@
-# Judicial AI Safety Lab v3.5
+# Judicial AI Safety Lab v4.0
 
 대한민국 사법·법률 분야 생성형 AI를 **위험평가 → 동일조건 검증 → 적대적 테스트 → 독립검증 → 법적 근거 변경감지 → 지속 모니터링 → 인간검토** 순서로 점검하는 연구용 PoC입니다.
 
@@ -83,3 +83,21 @@ Anthropic Claude의 독립 UI/UX·정보구조 감사 finding을 검토해 v2.5 
 - Full reconstructed repository test suite: **22/22 PASS** after v3.5 integration.
 
 - v3.5 verification scope: source/test files were re-fetched from GitHub and executed in a clean local reconstruction with PYTHONPATH=src.
+
+
+## v4.0 — audit provenance + temporal evidence guards
+- Requirement-level defect/retest Quality Log with pinned Git revisions.
+- Read-only evidence bundle integrity audit with SHA-256 manifest comparison.
+- Frozen evidence cutoff to block hindsight leakage from later legal material.
+- Pinned evidence snapshot contract and source→analysis lineage comparison.
+- Non-effective legislative states expanded and fail-closed lifecycle validation.
+- UNCERTAIN state made reachable and tested separately from CONFLICTING / CHANGED / UNSUPPORTED.
+- Governance loop now rejects failed scenarios outside the affected set.
+- GitHub Actions CI added with retained JUnit artifact.
+- Latest verified CI on v4.0 code: **30/30 tests PASS**.
+
+External audit request files:
+- [Jules code audit request](docs/audits/JULES_CODE_AUDIT_REQUEST_V40.md)
+- [Claude public-first UI/UX re-audit request](docs/audits/CLAUDE_UI_REAUDIT_REQUEST_V40.md)
+
+`Integrity PASS`, `Ready to Reproduce`, `Independent verification`, and `Live connector` remain different states.
