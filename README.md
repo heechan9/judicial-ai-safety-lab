@@ -1,4 +1,4 @@
-# Judicial AI Safety Lab v4.0
+# Judicial AI Safety Lab v4.5
 
 대한민국 사법·법률 분야 생성형 AI를 **위험평가 → 동일조건 검증 → 적대적 테스트 → 독립검증 → 법적 근거 변경감지 → 지속 모니터링 → 인간검토** 순서로 점검하는 연구용 PoC입니다.
 
@@ -101,3 +101,14 @@ External audit request files:
 - [Claude public-first UI/UX re-audit request](docs/audits/CLAUDE_UI_REAUDIT_REQUEST_V40.md)
 
 `Integrity PASS`, `Ready to Reproduce`, `Independent verification`, and `Live connector` remain different states.
+
+
+## v4.5 — verification planning + evidence semantics
+- **Legal Belief State** for partial-observation verification status. This is not a probability of legal correctness.
+- **Review Planner** ranks what to verify next using information gain / urgency / review cost. It never ranks legal outcomes.
+- **Hard-invalid vs comparable-difference split**: identity/structure mismatches abort; valid result differences are collected for review.
+- **Evidence Verification Level** separates VERIFIED / artifact-consistent / missing-original / conflicting / unsupported evidence states from legal uncertainty.
+- **Frozen Evaluation Baseline** detects post-hoc changes to source snapshots, scenario manifests, model/prompt identifiers, or evaluation contracts.
+- **Environment Fingerprint** records reproducibility metadata without claiming the same historical machine/environment.
+- **Public Release Privacy Guard** distinguishes current public cleanup from unverified Git history, prior branches/copies, and external caches.
+- v4.5 keeps planning strictly on the **verification/review path**, not judgment or sentencing recommendation.
