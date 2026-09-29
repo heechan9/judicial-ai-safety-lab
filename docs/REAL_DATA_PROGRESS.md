@@ -10,12 +10,15 @@ Current state:
 - Source-to-verification scenario mapping: **implemented**
 - Expert-review case-template generator: **implemented**
 - LAW_OC enrichment queue: **implemented**
-- Credential-safe official precedent detail collector: **implemented**
+- Credential-safe single-detail collector: **implemented**
+- Resumable batch detail collector: **implemented**
 - Discovery/detail identity reconciliation: **implemented**
-- API raw evidence verification: **pending LAW_OC-backed collection**
-- Normalized detail verification: **pending LAW_OC-backed detail**
+- Batch reconciliation + compact evidence index: **implemented**
+- API raw evidence verification: **pending actual LAW_OC-backed run**
+- Normalized detail verification: **pending actual LAW_OC-backed run**
 - Pilot-eligible cases: **0 / 30**
 - Expert-packet-ready cases: **0 / 30**
 - Expert ratings: **not started**
 
-The first pilot freezes all 30 discovered cases before outcome review. A case can become pilot-eligible only after credential-backed raw evidence, verified normalized detail, and frozen-cohort membership all agree.
+The software path for collecting and reconciling all 30 cases is now implemented.
+The project still does not claim the pilot is complete until the credential-backed run actually occurs.
