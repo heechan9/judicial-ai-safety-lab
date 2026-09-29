@@ -2,29 +2,27 @@
 
 Current state:
 
-- Public official precedent discovery: **30 cases collected**
-- Full 30-case cohort freeze machinery: **implemented**
-- Discovery validation: **implemented**
-- Stable case catalog: **implemented**
-- Discovery normalization schema: **implemented**
-- Source-to-verification scenario mapping: **implemented**
-- Expert-review case-template generator: **implemented**
-- LAW_OC enrichment queue: **implemented**
-- Credential-safe single-detail collector: **implemented**
-- Resumable batch detail collector: **implemented**
-- Discovery/detail identity reconciliation: **implemented**
-- Batch reconciliation + compact evidence index: **implemented**
-- Real-data pilot preflight gate: **implemented**
-- API raw evidence verification: **pending actual LAW_OC-backed run**
-- Normalized detail verification: **pending actual LAW_OC-backed run**
-- Pilot preflight ready: **no**
-- Pilot-eligible cases: **0 / 30**
-- Expert-packet-ready cases: **0 / 30**
+- Public official precedent discovery: **30 cases**
+- LAW_OC-backed official detail collection: **30 / 30 collected**
+- Failed detail collection: **0**
+- Reconciliation: **30 / 30 VERIFIED_DETAIL_READY**
+- Identity review required: **0**
+- Detail pending: **0**
+- Evidence index: **30 verified / 0 review / 0 pending**
+- Real-data pilot preflight: **PASS**
+- Preflight blockers: **none**
+- Frozen v13 real-data assessment: **pending generation**
+- Blinded expert packet: **pending frozen assessment**
 - Expert ratings: **not started**
+- Jules v13 external code/evidence audit: **request prepared, not completed**
+- Claude v13 UI/research-claim re-audit: **request prepared, not completed**
 
-The software path now reaches a fail-closed pilot preflight gate.
-The project still does not claim real-data validation until the 30-case credential-backed evidence run is actually completed.
+The 30-case credential-backed evidence run is complete through preflight. This means the frozen cohort has traceable official-detail evidence and no unresolved identity/pending blockers.
 
+It does **not** mean:
+- the system's legal conclusions are correct,
+- expert review is complete,
+- an external audit is complete,
+- the project is judicially certified.
 
-## Live PC validation finding (v12.0)
-A credential placeholder was intentionally/accidentally supplied during the first live batch attempt. The upstream API returned error objects with `result`/`msg`; the pre-v12 collector incorrectly counted those hashable JSON objects as collected evidence. v12.0 fixes this by requiring an actual precedent-detail object and exact precedent identity match before an envelope can validate. The 30 pre-fix raw files are invalid research evidence and must be deleted before recollection.
+The next frozen artifact is the v13 real-data assessment tied to commit `3de937f3833e08c3e0c141444ae71fcbf9fc5148`.
