@@ -66,3 +66,42 @@ def test_cli_stops_at_review_pending_without_fake_human_decision(tmp_path,monkey
     assert vp["review_session"]["state"]=="REVIEW_PENDING"
     assert vp["review_session"]["human_disposition"] is None
     assert vp["finding_registry"]["count"]>=1
+
+def test_review_cli_packages_only_after_explicit_human_disposition(tmp_path):
+    import json
+    from judicial_ai_safety_lab.review_cli import review_assessment, main as review_main
+    report={
+      "verification_planning":{
+        "frozen_baseline":{"status":"FROZEN","baseline_hash":"a"*64},
+        "finding_registry":{"open_ids":["F1","F2"]},
+        "review_session":{
+          "session_id":"S1",
+          "actions":[
+            {"action_id":"A1","action_type":"VERIFY_SOURCE","target_ref":"LAW-1","rationale":"원본 확인"}
+          ]
+        }
+      }
+    }
+    packaged=review_assessment(report,disposition="F1 확인 완료",resolved_findings=["F1"])
+    assert packaged["state"]=="PACKAGED"
+    assert packaged["payload"]["open_findings"]==["F2"]
+    assert packaged["payload"]["human_disposition"]=="F1 확인 완료"
+
+    assessment=tmp_path/"assessment.json"
+    assessment.write_text(json.dumps(report,ensure_ascii=False),encoding="utf-8")
+    output=tmp_path/"reviewed.json"
+    review_main(["--assessment",str(assessment),"--disposition","검토 완료","--resolve","F1","--output",str(output)])
+    saved=json.loads(output.read_text(encoding="utf-8"))
+    assert saved["state"]=="PACKAGED"
+    with pytest.raises(FileExistsError):
+        review_main(["--assessment",str(assessment),"--disposition","재실행","--output",str(output)])
+
+def test_review_cli_rejects_unknown_finding_resolution():
+    from judicial_ai_safety_lab.review_cli import review_assessment
+    report={"verification_planning":{
+      "frozen_baseline":{"status":"FROZEN","baseline_hash":"a"*64},
+      "finding_registry":{"open_ids":["F1"]},
+      "review_session":{"session_id":"S1","actions":[
+        {"action_id":"A1","action_type":"CHECK_CONFLICT","target_ref":"X","rationale":"확인"}]}}}
+    with pytest.raises(ValueError):
+        review_assessment(report,disposition="검토",resolved_findings=["NOPE"])
