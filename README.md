@@ -112,7 +112,8 @@ External audit request files:
 - **Frozen Evaluation Baseline** detects post-hoc changes to source snapshots, scenario manifests, model/prompt identifiers, or evaluation contracts.
 - **Environment Fingerprint** records reproducibility metadata without claiming the same historical machine/environment.
 - **Public Release Privacy Guard** distinguishes current public cleanup from unverified Git history, prior branches/copies, and external caches.
-- v4.5 keeps planning strictly on the **verification/review path**, not judgment or sentencing recommendation.\n- Latest GitHub Actions verification: **67/67 PASS**, 0 failures, 0 errors.
+- v4.5 keeps planning strictly on the **verification/review path**, not judgment or sentencing recommendation.
+- Latest GitHub Actions verification: **67/67 PASS**, 0 failures, 0 errors.
 
 
 ## v5.0 — claim audit + atomic evidence + review-path simulation
@@ -197,7 +198,7 @@ External audit request files:
 - Current truthful real-data state: 30 public precedents collected, **0/30 pilot-eligible** until LAW_OC-backed raw collection and normalization are completed.
 - See [v9 case catalog](docs/V9_CASE_CATALOG.md) and [real-data progress](docs/REAL_DATA_PROGRESS.md).
 
-- Latest verified GitHub Actions JUnit evidence for v9.0: **99/99 PASS**, 0 failures, 0 errors.
+- Latest verified GitHub Actions JUnit evidence for v9.0: **115/115 PASS**, 0 failures, 0 errors.
 
 
 ## v9.5 — normalization + verification mapping + expert templates
@@ -226,3 +227,5 @@ External audit request files:
 - Only reconciled matching detail can become `VERIFIED_DETAIL_READY`, with both raw-response hash and normalized-case hash preserved.
 - Current real-data state remains **0/30 verified** until the credential-backed detail commands are actually run.
 - See [v10.5 detail reconciliation](docs/V10_5_DETAIL_RECONCILIATION.md).
+
+- Latest verified GitHub Actions JUnit evidence for v10.5: **115/115 PASS**, 0 failures, 0 errors.
