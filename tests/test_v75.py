@@ -39,3 +39,33 @@ def test_external_audit_rejects_fake_commit_or_naive_time():
     with pytest.raises(ValueError):
         register_external_audit(ExternalAudit("A","Jules","AI","short","2026-09-29T12:00:00",
                                               "code audit","x","COMPLETED"))
+
+def test_pilot_and_audit_clis(tmp_path):
+    import json
+    from judicial_ai_safety_lab.pilot_cli import main as pilot_main
+    from judicial_ai_safety_lab.audit_cli import main as audit_main
+
+    candidates=tmp_path/"candidates.json"
+    candidates.write_text(json.dumps([
+      {"source_id":"P2","stratum":"stable","title":"B","metadata":{}},
+      {"source_id":"P1","stratum":"stable","title":"A","metadata":{}},
+      {"source_id":"P3","stratum":"conflict","title":"C","metadata":{}}
+    ],ensure_ascii=False),encoding="utf-8")
+    targets=tmp_path/"targets.json"
+    targets.write_text(json.dumps({"stable":1,"conflict":1},ensure_ascii=False),encoding="utf-8")
+    selected=tmp_path/"selected.json"
+    pilot_main(["--candidates",str(candidates),"--targets",str(targets),
+                "--selection-note","pre-registered","--output",str(selected)])
+    data=json.loads(selected.read_text(encoding="utf-8"))
+    assert data["selected_count"]==2
+
+    audits=tmp_path/"audits.json"
+    audits.write_text(json.dumps([{
+      "audit_id":"A1","reviewer":"Claude","reviewer_type":"AI reviewer",
+      "target_commit":"a"*40,"reviewed_at":"2026-09-29T12:00:00+09:00",
+      "scope":"UI/UX audit","evidence_ref":"docs/audits/result.md","status":"COMPLETED"
+    }],ensure_ascii=False),encoding="utf-8")
+    out=tmp_path/"audit-state.json"
+    audit_main(["--audits",str(audits),"--output",str(out)])
+    state=json.loads(out.read_text(encoding="utf-8"))
+    assert state["completed_count"]==1 and state["has_completed_ui_audit"]
