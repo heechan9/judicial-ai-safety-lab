@@ -9,6 +9,7 @@ from .claim_audit import ClaimEvidence, audit_claims
 from .finding_registry import Finding, register_findings
 from .review_session import ReviewActionContract, create_session, freeze_session, add_review_action
 from .review_policy import guard_review_plan
+from .assessment_contract import build_assessment_contract
 
 ROOT=Path(__file__).resolve().parents[2]
 
@@ -118,6 +119,7 @@ def main():
       "human_review_queue":q,
       "decision":"HUMAN_REVIEW_REQUIRED" if grade=="HIGH" or dw["status"]=="WATCH" or q else "LIMITED_USE",
     }
+    report["assessment_contract"]=build_assessment_contract(report)
     dump(ROOT/"results/assessment.json",report)
     dump(ROOT/"results/replay_manifest.json",{"contract":c,"scenario_ids":[x.scenario_id for x in rows]})
     render(report,ROOT/"web/index.html")
