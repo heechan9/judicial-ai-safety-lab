@@ -2,10 +2,13 @@
 
 Current truthful state:
 
-- INTERNAL_VERIFIED: code/CI evidence exists for the implemented research framework.
-- REAL_DATA_PILOT_COMPLETE: **not yet complete** — requires live public official-data collection using the owner's credential.
-- EXPERT_REVIEW_COMPLETE: **not yet complete** — requires actual independent reviewer ratings.
-- EXTERNAL_CODE_AUDIT_COMPLETE: **not yet complete** — prepared prompts do not count as completed audits.
-- EXTERNALLY_VALIDATED_PILOT: **not yet complete**.
+- INTERNAL_VERIFIED: **complete for current research code path** — GitHub Actions v14.0 JUnit evidence is 147/147 PASS and OpenAI internal code/evidence audit v14.0 is saved.
+- REAL_DATA_PILOT_COMPLETE: **evidence pipeline complete through frozen fingerprint reproduction** — official detail collection 30/30, reconciliation 30/30 VERIFIED_DETAIL_READY, evidence preflight PASS, assessment/packet fingerprints reproduced.
+- EXPERT_REVIEW_COMPLETE: **not complete** — requires actual independent reviewer ratings tied to the frozen packet, completion-gate coverage, reliability summary, and any required adjudication.
+- EXTERNAL_CODE_AUDIT_COMPLETE: **not complete** — Jules v14 request is open, but no saved independent audit result exists yet.
+- EXTERNAL_UI_CLAIM_AUDIT_COMPLETE: **not complete** — Claude v14 request is open, but no saved re-audit result exists yet.
+- EXTERNALLY_VALIDATED_PILOT: **not complete**.
 
-The project must not advance these states merely because the supporting code or templates exist.
+Prepared tooling, request documents, issues, or internal audits do not substitute for independent expert ratings or external audit results.
+
+This status does not claim legal correctness, judicial certification, institutional approval, or production readiness.
