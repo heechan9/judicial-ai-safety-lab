@@ -13,6 +13,10 @@ This ledger records **material contribution scope** separately from **independen
 | v5.0 | Claim audit, quarantine, atomic evidence package, review simulation, CLI integration | Re-audit brief prepared | Code-audit brief prepared | External results not yet recorded |
 | v5.5 | Finding registry, review policy, review-session state machine, operator CLI | — | — | Explicit human disposition required |
 | v6.0 | Hash-chained audit events, immutable review package snapshot, provenance hardening | Re-audit brief prepared | Code-audit brief prepared | Latest completed external results still tracked separately |
+| v6.5 | Strict assessment handoff contract, review-package verifier, jaisl-verify | — | — | Human disposition remains explicit; stored summaries are revalidated |
+| v7.0 | Official precedent connector contract, real-data manifest, expert evaluation contract/CLI | — | — | Real-data/expert workflow ready; actual external inputs pending |
+| v7.5 | Frozen pilot selection, blinded expert packet, external audit registry | — | — | Prepared audits do not count as completed |
+| v8.0 | External validation gate, credential-safe raw precedent collection, expert-packet/validation CLIs, real-data runbook | — | — | Internal framework ready; live pilot/expert/external audit still pending |
 
 ## How this is intended to appear on GitHub
 
