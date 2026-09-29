@@ -48,3 +48,15 @@ def test_reconcile_rejects_envelope_identity_mismatch():
       "PrecService":{"판례정보일련번호":"999","사건번호":"2026다123","사건명":"손해배상(기)"}})
     with pytest.raises(ValueError):
         reconcile_case(DISCOVERY,case_id="JAISL-D001",detail_envelope=env)
+
+
+def test_detail_envelope_rejects_api_error_payload():
+    env=collect_precedent_detail("123",oc="bad",fetcher=lambda url:{"result":"fail","msg":"invalid credential"})
+    with pytest.raises(ValueError,match="official detail payload required"):
+        verify_detail_envelope(env)
+
+def test_detail_envelope_rejects_wrong_precedent_identity():
+    env=collect_precedent_detail("123",oc="x",fetcher=lambda url:{
+      "PrecService":{"판례정보일련번호":"999","사건번호":"2026다123","사건명":"손해배상(기)"}})
+    with pytest.raises(ValueError,match="precedent identity mismatch"):
+        verify_detail_envelope(env)
