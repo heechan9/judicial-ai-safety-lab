@@ -12,6 +12,8 @@ jaisl-review="judicial_ai_safety_lab.review_cli:main"
 jaisl-verify="judicial_ai_safety_lab.verify_cli:main"
 jaisl-realdata="judicial_ai_safety_lab.real_data_cli:main"
 jaisl-expert="judicial_ai_safety_lab.expert_cli:main"
+jaisl-pilot="judicial_ai_safety_lab.pilot_cli:main"
+jaisl-audit="judicial_ai_safety_lab.audit_cli:main"
 [tool.pytest.ini_options]
 pythonpath=["src"]
 testpaths=["tests"]
