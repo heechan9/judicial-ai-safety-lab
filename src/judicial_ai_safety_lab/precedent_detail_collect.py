@@ -32,13 +32,45 @@ def collect_precedent_detail(precedent_id,*,oc=None,fetcher=None):
       ],
     }
 
+def _find_detail_objects(raw):
+    if not isinstance(raw,dict):
+        return []
+    found=[]
+    stack=[raw]
+    while stack:
+        value=stack.pop()
+        if isinstance(value,dict):
+            serial=str(value.get("판례정보일련번호","")).strip()
+            case_no=str(value.get("사건번호","")).strip()
+            case_name=str(value.get("사건명","")).strip()
+            if serial and (case_no or case_name):
+                found.append(value)
+            stack.extend(value.values())
+        elif isinstance(value,list):
+            stack.extend(value)
+    unique={}
+    for row in found:
+        key=(str(row.get("판례정보일련번호","")).strip(),
+             str(row.get("사건번호","")).strip(),
+             str(row.get("사건명","")).strip())
+        unique[key]=row
+    return list(unique.values())
+
 def verify_detail_envelope(envelope):
     if envelope.get("schema")!="jaisl.precedent-detail-raw.v1":
         raise ValueError("unsupported detail envelope schema")
     if envelope.get("credential_stored") is not False:
         raise ValueError("credential storage is not permitted")
-    if not str(envelope.get("prec_seq","")).isdigit():
+    prec_seq=str(envelope.get("prec_seq","")).strip()
+    if not prec_seq.isdigit():
         raise ValueError("prec_seq must be numeric")
-    if _hash(envelope.get("raw_response"))!=envelope.get("raw_response_hash"):
+    raw=envelope.get("raw_response")
+    if _hash(raw)!=envelope.get("raw_response_hash"):
         raise ValueError("raw detail hash mismatch")
-    return {"valid":True,"prec_seq":envelope["prec_seq"],"raw_response_hash":envelope["raw_response_hash"]}
+    objects=_find_detail_objects(raw)
+    if len(objects)!=1:
+        raise ValueError(f"official detail payload required; found {len(objects)} detail objects")
+    actual=str(objects[0].get("판례정보일련번호","")).strip()
+    if actual!=prec_seq:
+        raise ValueError("official detail precedent identity mismatch")
+    return {"valid":True,"prec_seq":prec_seq,"raw_response_hash":envelope["raw_response_hash"]}
