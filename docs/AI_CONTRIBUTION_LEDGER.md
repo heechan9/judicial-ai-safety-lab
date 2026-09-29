@@ -31,3 +31,7 @@ Therefore this repository uses:
 4. commit / CI history for implementation verification.
 
 We do **not** fabricate GitHub identities, email addresses, or completed reviews merely to make an AI tool appear in GitHub's automatic contributor graph.
+
+| v9.5 | Discovery normalization, scenario mapping, expert-review templates | — | — | Detail remains unverified until credential-backed evidence |
+| v10.0 | Full 30-case cohort freeze + deterministic LAW_OC enrichment queue | — | — | Cohort fixed before outcome review |
+| v10.5 | Credential-safe detail collector, frozen identity reconciliation, raw/normalized hashing | — | — | 115/115 CI PASS; live LAW_OC execution still pending |
