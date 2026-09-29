@@ -46,3 +46,40 @@ def test_expert_eval_summary_and_agreement():
 def test_expert_eval_rejects_out_of_range_rating():
     bad=ExpertRating("R1","C1",6,4,4,4,4)
     with pytest.raises(ValueError): summarize_ratings([bad])
+
+def test_real_data_cli_and_expert_cli(tmp_path):
+    import json
+    from judicial_ai_safety_lab.real_data_cli import main as real_main
+    from judicial_ai_safety_lab.expert_cli import main as expert_main
+
+    records=tmp_path/"records.json"
+    records.write_text(json.dumps([
+      {"source_id":"PREC-1","title":"A"},
+      {"source_id":"PREC-2","title":"B"}
+    ],ensure_ascii=False),encoding="utf-8")
+    manifest=tmp_path/"manifest.json"
+    real_main([
+      "--records",str(records),
+      "--source-name","국가법령정보 공동활용",
+      "--source-url","https://www.law.go.kr/DRF/",
+      "--cutoff","2026-09-29T00:00:00+09:00",
+      "--selection-rule","pre-registered",
+      "--output",str(manifest)
+    ])
+    saved=json.loads(manifest.read_text(encoding="utf-8"))
+    assert saved["record_count"]==2
+
+    ratings=tmp_path/"ratings.json"
+    ratings.write_text(json.dumps([
+      {"reviewer_id":"R1","case_id":"C1","source_traceability":5,"status_correctness":5,
+       "uncertainty_appropriateness":4,"human_review_appropriateness":5,"explanation_clarity":4,
+       "critical_error":False,"comment":""},
+      {"reviewer_id":"R2","case_id":"C1","source_traceability":5,"status_correctness":4,
+       "uncertainty_appropriateness":4,"human_review_appropriateness":5,"explanation_clarity":4,
+       "critical_error":False,"comment":""}
+    ],ensure_ascii=False),encoding="utf-8")
+    out=tmp_path/"expert-summary.json"
+    expert_main(["--ratings",str(ratings),"--output",str(out)])
+    result=json.loads(out.read_text(encoding="utf-8"))
+    assert result["summary"]["reviewer_count"]==2
+    assert result["pairwise_exact_agreement"]["eligible_cases"]==1
