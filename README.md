@@ -1,4 +1,4 @@
-# Judicial AI Safety Lab v8.5
+# Judicial AI Safety Lab v9.0
 
 대한민국 사법·법률 분야 생성형 AI를 **위험평가 → 동일조건 검증 → 적대적 테스트 → 독립검증 → 법적 근거 변경감지 → 지속 모니터링 → 인간검토** 순서로 점검하는 연구용 PoC입니다.
 
@@ -187,3 +187,12 @@ External audit request files:
 - `jaisl-discovery` validates official HTTPS domain, `precSeq` identity, duplicate IDs, dates, required metadata and unfrozen status.
 - This lets the project prepare real-case work before `LAW_OC` is available without pretending that public-web discovery equals API-backed raw evidence.
 - See [public precedent discovery provenance](docs/PUBLIC_PRECEDENT_DISCOVERY_V1.md).
+
+
+## v9.0 — discovery catalog + pilot readiness
+- Added a stable **case catalog** between public discovery and the frozen real-data pilot.
+- Every discovery-only case is explicitly marked `PUBLIC_WEB_DISCOVERY_ONLY`, with API/raw/normalized/pilot/expert readiness flags forced false.
+- `jaisl-catalog` creates a deterministic case catalog with stable JAISL case IDs and a catalog hash.
+- `jaisl-readiness` computes per-case missing evidence and allows `pilot_eligible=true` only when API raw evidence, normalized detail and frozen pilot selection are all present.
+- Current truthful real-data state: 30 public precedents collected, **0/30 pilot-eligible** until LAW_OC-backed raw collection and normalization are completed.
+- See [v9 case catalog](docs/V9_CASE_CATALOG.md) and [real-data progress](docs/REAL_DATA_PROGRESS.md).
