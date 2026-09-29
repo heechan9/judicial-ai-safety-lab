@@ -5,7 +5,7 @@ state, and packaging. Allowed actions are verification actions only.
 """
 from dataclasses import dataclass, field, asdict
 from datetime import datetime, timezone
-import hashlib, json
+import hashlib, json, re
 
 ALLOWED_ACTION_TYPES={
     "VERIFY_SOURCE",
@@ -17,6 +17,7 @@ ALLOWED_ACTION_TYPES={
     "VERIFY_ORIGINAL",
 }
 SESSION_STATES={"COLLECTED","FROZEN","REVIEW_PENDING","REVIEWED","PACKAGED"}
+SHA256_RE=re.compile(r"^[0-9a-f]{64}$")
 
 @dataclass(frozen=True)
 class ReviewActionContract:
@@ -51,7 +52,7 @@ def validate_action(action:ReviewActionContract):
 
 def create_session(*,session_id,baseline_hash,open_findings=()):
     if not isinstance(session_id,str) or not session_id.strip(): raise ValueError("session id required")
-    if not isinstance(baseline_hash,str) or len(baseline_hash)!=64: raise ValueError("baseline hash must be SHA256")
+    if not isinstance(baseline_hash,str) or not SHA256_RE.fullmatch(baseline_hash): raise ValueError("baseline hash must be lowercase SHA256")
     findings=list(dict.fromkeys(open_findings))
     s=ReviewSession(session_id.strip(),baseline_hash,open_findings=findings)
     s.audit_log.append({"event":"SESSION_CREATED","at":_now(),"open_findings":list(findings)})
@@ -94,10 +95,8 @@ def package_session(session):
       "open_findings":session.open_findings,
       "actions":session.actions,
       "human_disposition":session.human_disposition,
-      "audit_log":session.audit_log,
+      "audit_log":[dict(x) for x in session.audit_log],
     }
     session.state="PACKAGED"
     package_hash=_hash(payload)
-    session.audit_log.append({"event":"SESSION_PACKAGED","at":_now(),"package_hash":package_hash})
-    return {"package_hash":package_hash,"state":session.state,"payload":payload,
-            "note":"Package records a human review process; it is not a legal judgment."}
+    package_event={"event":"SESSION_PACKAGED","at":_now(),"package_hash":package_hash}\n    session.audit_log.append(package_event)\n    return {"package_hash":package_hash,"state":session.state,"payload":payload,\n            "package_event":package_event,\n            "note":"Package records a human review process; it is not a legal judgment."}
