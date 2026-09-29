@@ -17,6 +17,8 @@ This ledger records **material contribution scope** separately from **independen
 | v7.0 | Official precedent connector contract, real-data manifest, expert evaluation contract/CLI | — | — | Real-data/expert workflow ready; actual external inputs pending |
 | v7.5 | Frozen pilot selection, blinded expert packet, external audit registry | — | — | Prepared audits do not count as completed |
 | v8.0 | External validation gate, credential-safe raw precedent collection, expert-packet/validation CLIs, real-data runbook | — | — | Internal framework ready; live pilot/expert/external audit still pending |
+| v8.5 | 30-case official public precedent discovery pool + validator | — | — | Discovery-only; frozen pilot not claimed |
+| v9.0 | Stable case catalog, per-case pilot readiness gate, catalog/readiness CLIs, 99-test CI verification | — | — | 30 discovered cases, 0/30 pilot-eligible until raw API + normalized detail + frozen selection |
 
 ## How this is intended to appear on GitHub
 
