@@ -1,4 +1,4 @@
-# Judicial AI Safety Lab v4.5
+# Judicial AI Safety Lab v5.0
 
 대한민국 사법·법률 분야 생성형 AI를 **위험평가 → 동일조건 검증 → 적대적 테스트 → 독립검증 → 법적 근거 변경감지 → 지속 모니터링 → 인간검토** 순서로 점검하는 연구용 PoC입니다.
 
@@ -112,3 +112,12 @@ External audit request files:
 - **Environment Fingerprint** records reproducibility metadata without claiming the same historical machine/environment.
 - **Public Release Privacy Guard** distinguishes current public cleanup from unverified Git history, prior branches/copies, and external caches.
 - v4.5 keeps planning strictly on the **verification/review path**, not judgment or sentencing recommendation.\n- Latest GitHub Actions verification: **43/43 PASS**, 0 failures, 0 errors.
+
+
+## v5.0 — claim audit + atomic evidence + review-path simulation
+- **Claim-to-Evidence Audit** checks public/research claims against explicit evidence references and verification levels.
+- **Evidence Quarantine** prevents invalid evidence from being silently dropped; records quarantine → fix → retest → close/reopen.
+- **Atomic Evidence Package** writes per-run artifact SHA-256 + byte-size manifests with explicit limits: integrity is not authenticity or independent verification.
+- **Counterfactual Review Simulator** explores verification actions only and ranks paths by unresolved findings and review cost. It does not search legal outcomes.
+- Public-facing claims that are missing originals, conflicting, or unsupported are automatically marked for review.
+- v5.0 preserves the human-final-decision boundary and keeps planning on verification/review actions only.
