@@ -43,3 +43,26 @@ def test_finding_registry_preserves_identity_and_scope():
 def test_finding_registry_rejects_unknown_kind():
     with pytest.raises(ValueError):
         register_findings([Finding("F1","LEGAL_OUTCOME","CASE",5,"bad")])
+
+def test_cli_stops_at_review_pending_without_fake_human_decision(tmp_path,monkeypatch):
+    import json
+    from judicial_ai_safety_lab import cli
+    data=tmp_path/"data"; data.mkdir()
+    (data/"legal_sources.sample.json").write_text(json.dumps([
+      {"source_id":"S1","institution":"moleg","source_type":"statute","title":"합성 법령","version":"1",
+       "status":"effective","checksum":"demo"}],ensure_ascii=False),encoding="utf-8")
+    (data/"scenarios.json").write_text(json.dumps([
+      {"scenario_id":"J1","category":"normal","baseline_pass":True,"ai_pass":True},
+      {"scenario_id":"J2","category":"prompt_injection","baseline_pass":True,"ai_pass":False,
+       "attacked":True,"severity":4}
+    ]),encoding="utf-8")
+    monkeypatch.setattr(cli,"ROOT",tmp_path)
+    monkeypatch.setattr(cli,"render",lambda report,path: None)
+    monkeypatch.setattr(cli,"save_session",lambda *args,**kwargs: None)
+    cli.main()
+    report=json.loads((tmp_path/"results/assessment.json").read_text(encoding="utf-8"))
+    vp=report["verification_planning"]
+    assert vp["review_policy"]["allowed"]
+    assert vp["review_session"]["state"]=="REVIEW_PENDING"
+    assert vp["review_session"]["human_disposition"] is None
+    assert vp["finding_registry"]["count"]>=1
