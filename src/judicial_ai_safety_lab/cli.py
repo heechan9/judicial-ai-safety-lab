@@ -6,8 +6,40 @@ from .session import save_session
 from .baseline_guard import freeze_baseline
 from .review_planner import belief_state, ReviewCandidate, plan_reviews
 from .claim_audit import ClaimEvidence, audit_claims
+from .finding_registry import Finding, register_findings
+from .review_session import ReviewActionContract, create_session, freeze_session, add_review_action
+from .review_policy import guard_review_plan
 
 ROOT=Path(__file__).resolve().parents[2]
+
+def _finding_registry(source_findings,rows):
+    items=[]
+    n=1
+    flag_kind={
+      "NOT_EFFECTIVE":"SOURCE_UNSUPPORTED",
+      "CONSTITUTIONAL_STATUS":"CONSTITUTIONAL_IMPACT",
+      "MISSING_CHECKSUM":"SOURCE_UNSUPPORTED",
+    }
+    for source in source_findings:
+        for flag in source["flags"]:
+            items.append(Finding(f"F{n:03d}",flag_kind.get(flag,"SOURCE_UNCERTAIN"),
+                                 "source:"+source["source_id"],4,
+                                 f"{source['source_id']}: {flag}"))
+            n+=1
+    for row in rows:
+        if row.source_changed:
+            items.append(Finding(f"F{n:03d}","SOURCE_CHANGED",row.scenario_id,row.severity,
+                                 "source change requires targeted re-verification")); n+=1
+        if row.category=="contradictory" and not row.ai_pass:
+            items.append(Finding(f"F{n:03d}","SOURCE_CONFLICT",row.scenario_id,row.severity,
+                                 "conflicting-evidence scenario failed")); n+=1
+        if row.attacked and not row.ai_pass:
+            items.append(Finding(f"F{n:03d}","TECHNICAL_FAILURE",row.scenario_id,row.severity,
+                                 "adversarial scenario failed")); n+=1
+        if row.category=="information_missing" and not row.ai_pass:
+            items.append(Finding(f"F{n:03d}","SOURCE_UNSUPPORTED",row.scenario_id,row.severity,
+                                 "required information is missing")); n+=1
+    return register_findings(items)
 
 def main():
     sources=load_sources(ROOT/"data/legal_sources.sample.json"); findings=source_guard(sources)
@@ -45,6 +77,21 @@ def main():
       ClaimEvidence("DEMO-002","독립 검증이 완료되었다",(),"UNSUPPORTED",True),
     ])
 
+    registry=_finding_registry(findings,rows)
+    session=create_session(session_id="synthetic-review-v5.5",baseline_hash=baseline["baseline_hash"],
+                           open_findings=registry["open_ids"])
+    freeze_session(session)
+    action_contracts=[
+      ReviewActionContract("review-source-change","CHECK_CHANGE","legal-sources","변경된 근거와 영향 범위를 확인"),
+      ReviewActionContract("review-conflict","CHECK_CONFLICT","conflicting-evidence","상충 근거를 나란히 확인"),
+      ReviewActionContract("review-attack","RERUN_TECHNICAL","adversarial-scenarios","기술적 실패를 동일 조건에서 재검증"),
+    ]
+    policy=guard_review_plan([{"action_type":x.action_type} for x in action_contracts])
+    if not policy["allowed"]:
+        raise ValueError("review plan violates verification-only policy")
+    for action in action_contracts:
+        add_review_action(session,action)
+
     report={
       "risk":{"score":score,"grade":grade,"metrics":metrics},
       "evaluation":ev,
@@ -55,7 +102,17 @@ def main():
         "research_fixture_only":True,
         "frozen_baseline":baseline,
         "belief_state":belief,
+        "finding_registry":registry,
         "next_review_plan":planner,
+        "review_policy":policy,
+        "review_session":{
+          "session_id":session.session_id,
+          "state":session.state,
+          "open_findings":session.open_findings,
+          "actions":session.actions,
+          "human_disposition":session.human_disposition,
+          "note":"Synthetic review session stops at REVIEW_PENDING until a human disposition is explicitly recorded.",
+        },
         "claim_audit":claims,
       },
       "human_review_queue":q,
