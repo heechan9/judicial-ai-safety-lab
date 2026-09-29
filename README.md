@@ -1,4 +1,4 @@
-# Judicial AI Safety Lab v13.5
+# Judicial AI Safety Lab v14.0
 
 대한민국 사법·법률 분야 생성형 AI를 **위험평가 → 동일조건 검증 → 적대적 테스트 → 독립검증 → 법적 근거 변경감지 → 지속 모니터링 → 인간검토** 순서로 점검하는 연구용 PoC입니다.
 
@@ -289,3 +289,12 @@ External audit request files:
 - OpenAI's v13.5 internal audit records the previous expert-coverage gap as fixed and keeps external Jules/Claude audits explicitly pending.
 - Verified v13.5 GitHub Actions JUnit evidence: **142/142 PASS**, 0 failures, 0 errors, 0 skipped.
 - See [expert-review protocol](docs/EXPERT_REVIEW_PROTOCOL_V135.md) and [OpenAI internal audit](docs/audits/OPENAI_CODE_AUDIT_V135.md).
+
+
+## v14.0 — expert reliability + adjudication
+- Added quadratic weighted Cohen kappa for the five ordinal 1–5 expert-review dimensions when exactly two independent reviewers rate the frozen cases.
+- Added additive critical-error adjudication records so disagreement resolution never overwrites the original reviewer ratings.
+- `jaisl-expert-reliability` reports per-dimension ordinal agreement; it is a descriptive pilot statistic, not proof of legal correctness.
+- `jaisl-expert-adjudication` blocks completion until every critical case has an explicit adjudication and no case remains confirmed/unresolved.
+- Real-data status is aligned with the reproducible v13 assessment and expert-packet fingerprints; actual independent ratings and Jules/Claude external audit results remain pending.
+- See [v14 expert-review protocol](docs/EXPERT_REVIEW_PROTOCOL_V140.md) and [paper evidence matrix](docs/PAPER_EVIDENCE_MATRIX_V140.md).
