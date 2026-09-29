@@ -1,4 +1,4 @@
-# Judicial AI Safety Lab v7.0
+# Judicial AI Safety Lab v7.5
 
 대한민국 사법·법률 분야 생성형 AI를 **위험평가 → 동일조건 검증 → 적대적 테스트 → 독립검증 → 법적 근거 변경감지 → 지속 모니터링 → 인간검토** 순서로 점검하는 연구용 PoC입니다.
 
@@ -160,3 +160,12 @@ External audit request files:
 - `jaisl-expert` produces descriptive summaries and pairwise exact agreement without calling the result an official judicial certification.
 - External validation plan, expert form, real-data checklist and audit-result template are committed under `docs/`.
 - Verified GitHub Actions JUnit evidence for the v7.0 code/CLI set: **78/78 PASS**, 0 failures, 0 errors.
+
+
+## v7.5 — frozen pilot + external-audit registry
+- **Pre-registered Pilot Selection** freezes stratum targets, selected source IDs, stable order and a selection hash before outcome review.
+- `jaisl-pilot` creates a non-overwriting pilot-selection artifact from candidate/target JSON.
+- **Blinded Expert Packet** separates reviewer-facing case IDs from implementation context and limits evaluation to evidence handling / uncertainty / review routing / explanation quality.
+- **External Audit Registry** accepts only traceable audit records with reviewer/tool, timestamp, exact target commit, scope, evidence reference and explicit COMPLETED/PARTIAL/FAILED status.
+- `jaisl-audit` summarizes whether completed code/UI audits actually exist instead of inferring completion from prepared prompts.
+- The project still requires a real `LAW_OC` credential and actual reviewer responses before the real-data/expert/external-validation states can move from READY to COMPLETE.
