@@ -1,4 +1,4 @@
-# Judicial AI Safety Lab v8.0
+# Judicial AI Safety Lab v8.5
 
 대한민국 사법·법률 분야 생성형 AI를 **위험평가 → 동일조건 검증 → 적대적 테스트 → 독립검증 → 법적 근거 변경감지 → 지속 모니터링 → 인간검토** 순서로 점검하는 연구용 PoC입니다.
 
@@ -179,3 +179,11 @@ External audit request files:
 - `jaisl-validation` computes the current research validation state from internal CI, real-data manifest, frozen pilot selection, expert-review summary, completed code-audit state and claim-audit state.
 - Truthful current status remains: internal framework verified; real-data pilot, expert review and completed external code audit are still pending actual external inputs.
 - See [v8 real-data runbook](docs/REAL_DATA_RUNBOOK_V8.md) and [external validation status](docs/EXTERNAL_VALIDATION_STATUS.md).
+
+
+## v8.5 — credentialless public precedent discovery
+- Added a **30-case real public Supreme Court precedent discovery pool** from official law.go.kr pages: 20 civil + 10 criminal.
+- The pool is explicitly `discovery_only=true` and `pilot_selection_frozen=false`; it is **not** yet the frozen evaluation pilot.
+- `jaisl-discovery` validates official HTTPS domain, `precSeq` identity, duplicate IDs, dates, required metadata and unfrozen status.
+- This lets the project prepare real-case work before `LAW_OC` is available without pretending that public-web discovery equals API-backed raw evidence.
+- See [public precedent discovery provenance](docs/PUBLIC_PRECEDENT_DISCOVERY_V1.md).
