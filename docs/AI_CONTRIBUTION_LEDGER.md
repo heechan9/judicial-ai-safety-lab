@@ -38,3 +38,4 @@ We do **not** fabricate GitHub identities, email addresses, or completed reviews
 
 | v10.5 | Credential-backed single-detail collection, identity reconciliation, verified-detail normalization | — | — | Software path ready; actual LAW_OC evidence pending |
 | v11.0 | Resumable batch detail collection, cohort-wide reconciliation, evidence index, batch runbook | — | — | 30-case software pipeline complete; actual credential-backed run still pending |
+| v11.5 | Fail-closed pilot preflight gate separating software/evidence/expert readiness | — | — | Real-data execution blocked until all 30 official details reconcile |
