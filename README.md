@@ -1,4 +1,4 @@
-# Judicial AI Safety Lab v12.0
+# Judicial AI Safety Lab v12.5
 
 대한민국 사법·법률 분야 생성형 AI를 **위험평가 → 동일조건 검증 → 적대적 테스트 → 독립검증 → 법적 근거 변경감지 → 지속 모니터링 → 인간검토** 순서로 점검하는 연구용 PoC입니다.
 
@@ -260,3 +260,11 @@ External audit request files:
 - The returned precedent ID must exactly match the requested `prec_seq`; mismatches fail closed.
 - API error/empty/non-detail payloads are now recorded as `FAILED`, never `COLLECTED`.
 - Evidence generated before this fix with an invalid credential must be discarded and recollected with a real `LAW_OC`.
+
+
+## v12.5 — conservative title reconciliation
+- Live official-data reconciliation found 25/30 exact-ready cases and 5 title-only review cases.
+- Three were official detail titles that appended a trailing explanatory `[ ... ]` annotation to the same public-list title.
+- Two used a public-list summary ending in `등` while the official detail expanded the same charge list.
+- v12.5 accepts only conservative equivalence: exact match, trailing official annotation, or literal-prefix `등` expansion. Case-number and precedent-ID checks remain strict.
+- Non-prefix reorderings or unrelated title differences still route to `IDENTITY_REVIEW_REQUIRED`.
