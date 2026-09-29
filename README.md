@@ -1,4 +1,4 @@
-# Judicial AI Safety Lab v10.5
+# Judicial AI Safety Lab v11.0
 
 대한민국 사법·법률 분야 생성형 AI를 **위험평가 → 동일조건 검증 → 적대적 테스트 → 독립검증 → 법적 근거 변경감지 → 지속 모니터링 → 인간검토** 순서로 점검하는 연구용 PoC입니다.
 
@@ -229,3 +229,13 @@ External audit request files:
 - See [v10.5 detail reconciliation](docs/V10_5_DETAIL_RECONCILIATION.md).
 
 - Latest verified GitHub Actions JUnit evidence for v10.5: **115/115 PASS**, 0 failures, 0 errors.
+
+
+## v11.0 — resumable batch official-detail pipeline
+- Added a resumable **30-case official-detail batch collector** that writes one non-overwriting evidence envelope per precedent and never persists `LAW_OC`.
+- Existing detail files are skipped so interrupted runs can resume without overwriting prior evidence.
+- Network/API failures are recorded explicitly and never counted as successful evidence.
+- Added **batch identity reconciliation** across the frozen discovery cohort and a compact **evidence index** summarizing VERIFIED / REVIEW / PENDING status per source.
+- `jaisl-detail-batch`, `jaisl-batch-reconcile` and `jaisl-evidence-index` complete the software path from the 30-case queue to per-case verified-detail readiness.
+- Current truthful external-data status remains **0/30 verified** until an actual LAW_OC-backed batch run is executed.
+- See [v11 batch detail pipeline](docs/V11_BATCH_DETAIL_PIPELINE.md).
