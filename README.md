@@ -39,11 +39,12 @@ v2.0 검증 스냅샷: CLI 통합 실행 PASS, pytest 12/12 PASS. v2.5는 Claude
 
 
 ## Contributors & verification
-- 최희찬 — research lead / human final decision
-- OpenAI ChatGPT / Codex — AI-assisted implementation, tests and documentation
-- Google Jules — independent audit slot; completion is recorded only after a verifiable audit
+- **최희찬 (heechan9)** — research lead / human final decision
+- **OpenAI ChatGPT / Codex** — architecture, implementation, tests, code/evidence audit, documentation and integration support
+- **Anthropic Claude** — completed v2.5 UI/UX·정보구조·가독성 review; later re-audit briefs are tracked separately
+- **Google Jules** — independent code/evidence audit role; prepared audit briefs are not marked complete without a verifiable result
 
-See [CONTRIBUTORS.md](CONTRIBUTORS.md).
+See [CONTRIBUTORS.md](CONTRIBUTORS.md) and the [AI contribution ledger](docs/AI_CONTRIBUTION_LEDGER.md).
 
 
 ## 🌐 Web demo
