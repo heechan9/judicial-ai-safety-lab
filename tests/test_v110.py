@@ -79,3 +79,40 @@ def test_load_detail_envelopes_rejects_duplicate_identity(tmp_path):
     (tmp_path/"b.json").write_text(json.dumps(env,ensure_ascii=False),encoding="utf-8")
     with pytest.raises(ValueError):
         load_detail_envelopes(tmp_path)
+
+def test_detail_batch_collect_and_resume(tmp_path):
+    from judicial_ai_safety_lab.detail_batch_collect import collect_detail_batch
+    items=[{"case_id":"JAISL-D001","prec_seq":"101"},{"case_id":"JAISL-D002","prec_seq":"102"}]
+    def fake(url):
+        import re
+        seq=re.search(r"ID=(\d+)",url).group(1)
+        return {"PrecService":{"판례정보일련번호":seq,"사건번호":"2026다"+seq,"사건명":"사건"+seq}}
+    out=tmp_path/"details"
+    first=collect_detail_batch(items,output_dir=out,oc="secret",fetcher=fake)
+    assert first["collected"]==2 and first["failed"]==0 and first["complete"]
+    second=collect_detail_batch(items,output_dir=out,oc="secret",fetcher=fake)
+    assert second["skipped_existing"]==2 and second["complete"]
+
+def test_detail_batch_collect_records_failure_without_fake_success(tmp_path):
+    from judicial_ai_safety_lab.detail_batch_collect import collect_detail_batch
+    items=[{"case_id":"JAISL-D001","prec_seq":"101"},{"case_id":"JAISL-D002","prec_seq":"102"}]
+    def fake(url):
+        if "ID=102" in url: raise RuntimeError("network failure")
+        return {"PrecService":{"판례정보일련번호":"101","사건번호":"2026다101","사건명":"사건101"}}
+    result=collect_detail_batch(items,output_dir=tmp_path/"details",oc="secret",fetcher=fake)
+    assert result["collected"]==1 and result["failed"]==1
+    assert not result["complete"]
+    failed=next(x for x in result["results"] if x["status"]=="FAILED")
+    assert failed["prec_seq"]=="102"
+
+def test_detail_batch_cli_with_monkeypatched_collector(tmp_path,monkeypatch):
+    import judicial_ai_safety_lab.detail_batch_cli as mod
+    queue=tmp_path/"queue.json"
+    queue.write_text(json.dumps({"items":[{"case_id":"JAISL-D001","prec_seq":"101"}]}),encoding="utf-8")
+    monkeypatch.setattr(mod,"collect_detail_batch",lambda items,output_dir,stop_on_error=False:{
+      "schema":"jaisl.detail-batch-collect.v1","requested":1,"collected":1,"failed":0,
+      "skipped_existing":0,"results":[],"credential_stored":False,"complete":True})
+    report=tmp_path/"report.json"
+    mod.main(["--queue",str(queue),"--output-dir",str(tmp_path/"details"),"--report",str(report)])
+    data=json.loads(report.read_text(encoding="utf-8"))
+    assert data["complete"] and data["collected"]==1
