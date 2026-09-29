@@ -71,17 +71,21 @@ def test_review_cli_packages_only_after_explicit_human_disposition(tmp_path):
     import json
     from judicial_ai_safety_lab.review_cli import review_assessment, main as review_main
     report={
+      "decision":"HUMAN_REVIEW_REQUIRED",
       "verification_planning":{
+        "research_fixture_only":True,
         "frozen_baseline":{"status":"FROZEN","baseline_hash":"a"*64},
         "finding_registry":{"open_ids":["F1","F2"]},
         "review_session":{
-          "session_id":"S1",
+          "session_id":"S1","state":"REVIEW_PENDING","human_disposition":None,
           "actions":[
             {"action_id":"A1","action_type":"VERIFY_SOURCE","target_ref":"LAW-1","rationale":"원본 확인"}
           ]
         }
       }
     }
+    from judicial_ai_safety_lab.assessment_contract import build_assessment_contract
+    report["assessment_contract"]=build_assessment_contract(report)
     packaged=review_assessment(report,disposition="F1 확인 완료",resolved_findings=["F1"])
     assert packaged["state"]=="PACKAGED"
     assert packaged["payload"]["open_findings"]==["F2"]
@@ -98,11 +102,14 @@ def test_review_cli_packages_only_after_explicit_human_disposition(tmp_path):
 
 def test_review_cli_rejects_unknown_finding_resolution():
     from judicial_ai_safety_lab.review_cli import review_assessment
-    report={"verification_planning":{
+    report={"decision":"HUMAN_REVIEW_REQUIRED","verification_planning":{
+      "research_fixture_only":True,
       "frozen_baseline":{"status":"FROZEN","baseline_hash":"a"*64},
       "finding_registry":{"open_ids":["F1"]},
-      "review_session":{"session_id":"S1","actions":[
+      "review_session":{"session_id":"S1","state":"REVIEW_PENDING","human_disposition":None,"actions":[
         {"action_id":"A1","action_type":"CHECK_CONFLICT","target_ref":"X","rationale":"확인"}]}}}
+    from judicial_ai_safety_lab.assessment_contract import build_assessment_contract
+    report["assessment_contract"]=build_assessment_contract(report)
     with pytest.raises(ValueError):
         review_assessment(report,disposition="검토",resolved_findings=["NOPE"])
 
