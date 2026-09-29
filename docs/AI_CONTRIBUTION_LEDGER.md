@@ -41,3 +41,4 @@ We do **not** fabricate GitHub identities, email addresses, or completed reviews
 | v11.5 | Fail-closed pilot preflight gate separating software/evidence/expert readiness | — | — | Real-data execution blocked until all 30 official details reconcile |
 
 | v13.5 | Expert rating templates, fail-closed expert-review completion gate, 142-test CI verification, v13 assessment/packet fingerprint recomputation, internal audit | — | — | Expert review coordination open; actual ratings and external audits still pending |
+| v14.0 | Ordinal expert reliability metric, additive critical-error adjudication, paper evidence matrix, status reconciliation | — | — | Actual expert ratings and external audit results remain pending |
