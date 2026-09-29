@@ -39,3 +39,5 @@ We do **not** fabricate GitHub identities, email addresses, or completed reviews
 | v10.5 | Credential-backed single-detail collection, identity reconciliation, verified-detail normalization | — | — | Software path ready; actual LAW_OC evidence pending |
 | v11.0 | Resumable batch detail collection, cohort-wide reconciliation, evidence index, batch runbook | — | — | 30-case software pipeline complete; actual credential-backed run still pending |
 | v11.5 | Fail-closed pilot preflight gate separating software/evidence/expert readiness | — | — | Real-data execution blocked until all 30 official details reconcile |
+
+| v13.5 | Expert rating templates, fail-closed expert-review completion gate, 142-test CI verification, v13 assessment/packet fingerprint recomputation, internal audit | — | — | Expert review coordination open; actual ratings and external audits still pending |
