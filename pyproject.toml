@@ -16,6 +16,7 @@ jaisl-pilot="judicial_ai_safety_lab.pilot_cli:main"
 jaisl-audit="judicial_ai_safety_lab.audit_cli:main"
 jaisl-expert-packet="judicial_ai_safety_lab.expert_packet_cli:main"
 jaisl-validation="judicial_ai_safety_lab.validation_cli:main"
+jaisl-precedent-collect="judicial_ai_safety_lab.precedent_collect_cli:main"
 [tool.pytest.ini_options]
 pythonpath=["src"]
 testpaths=["tests"]
