@@ -1,4 +1,4 @@
-# Judicial AI Safety Lab v6.5
+# Judicial AI Safety Lab v7.0
 
 대한민국 사법·법률 분야 생성형 AI를 **위험평가 → 동일조건 검증 → 적대적 테스트 → 독립검증 → 법적 근거 변경감지 → 지속 모니터링 → 인간검토** 순서로 점검하는 연구용 PoC입니다.
 
@@ -150,3 +150,13 @@ External audit request files:
 - New `jaisl-verify` CLI verifies packaged human-review records without trusting stored summary fields.
 - Package integrity remains separate from legal correctness, operator identity, external notarization, and independent verification.
 - Latest v6.5 code is under GitHub Actions verification; completion status is recorded only after CI finishes.
+
+
+## v7.0 — real official-data pilot + expert evaluation
+- Official precedent connector contract for 국가법령정보 공동활용 `target=prec` list/detail APIs; live use requires the owner's `LAW_OC` credential.
+- Frozen **real-data manifest** records source identity/order, cutoff, selection rule, record count and canonical hash before evaluation.
+- `jaisl-realdata` creates a non-overwriting manifest from normalized official records.
+- **Expert Evaluation Contract** rates source traceability, status correctness, uncertainty appropriateness, human-review appropriateness and explanation clarity on 1–5 scales, with critical-error capture.
+- `jaisl-expert` produces descriptive summaries and pairwise exact agreement without calling the result an official judicial certification.
+- External validation plan, expert form, real-data checklist and audit-result template are committed under `docs/`.
+- Verified GitHub Actions JUnit evidence for the v7.0 code/CLI set: **78/78 PASS**, 0 failures, 0 errors.
