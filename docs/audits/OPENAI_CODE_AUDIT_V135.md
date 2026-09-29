@@ -78,7 +78,7 @@ The v13 assessment builder creates local `index` and `by_source` variables that
 are not subsequently used. This does not change the frozen hash or validation result,
 but cleanup would improve maintainability.
 
-Status: **non-blocking cleanup**.
+Status: **fixed in v13.5 main** by removing the unused locals/import; frozen v13.0 assessment target remains unchanged.
 
 ## NOT VERIFIED / PENDING
 
