@@ -1,4 +1,4 @@
-# Judicial AI Safety Lab v5.5
+# Judicial AI Safety Lab v6.0
 
 대한민국 사법·법률 분야 생성형 AI를 **위험평가 → 동일조건 검증 → 적대적 테스트 → 독립검증 → 법적 근거 변경감지 → 지속 모니터링 → 인간검토** 순서로 점검하는 연구용 PoC입니다.
 
@@ -94,7 +94,7 @@ Anthropic Claude의 독립 UI/UX·정보구조 감사 finding을 검토해 v2.5 
 - UNCERTAIN state made reachable and tested separately from CONFLICTING / CHANGED / UNSUPPORTED.
 - Governance loop now rejects failed scenarios outside the affected set.
 - GitHub Actions CI added with retained JUnit artifact.
-- Latest verified CI on v4.0 code: **51/51 tests PASS**.
+- Latest verified CI on v4.0 code: **67/67 tests PASS**.
 
 External audit request files:
 - [Jules code audit request](docs/audits/JULES_CODE_AUDIT_REQUEST_V40.md)
@@ -111,7 +111,7 @@ External audit request files:
 - **Frozen Evaluation Baseline** detects post-hoc changes to source snapshots, scenario manifests, model/prompt identifiers, or evaluation contracts.
 - **Environment Fingerprint** records reproducibility metadata without claiming the same historical machine/environment.
 - **Public Release Privacy Guard** distinguishes current public cleanup from unverified Git history, prior branches/copies, and external caches.
-- v4.5 keeps planning strictly on the **verification/review path**, not judgment or sentencing recommendation.\n- Latest GitHub Actions verification: **51/51 PASS**, 0 failures, 0 errors.
+- v4.5 keeps planning strictly on the **verification/review path**, not judgment or sentencing recommendation.\n- Latest GitHub Actions verification: **67/67 PASS**, 0 failures, 0 errors.
 
 
 ## v5.0 — claim audit + atomic evidence + review-path simulation
@@ -131,3 +131,12 @@ External audit request files:
 - Unknown findings cannot be silently marked resolved.
 - CLI now builds a finding registry and review-action contracts, then intentionally stops at **REVIEW_PENDING** with `human_disposition = null`.
 - The synthetic demo therefore demonstrates the handoff boundary rather than faking a completed human review.
+
+
+## v6.0 — tamper-evident review provenance
+- **Hash-chained audit events** detect later modification, deletion, insertion, or reordering within a recorded review log.
+- The chain uses canonical JSON + SHA-256 with a predecessor hash and sequence number for each event.
+- **Audit-chain integrity is not external notarization, timestamp authority, identity proof, or authenticity proof.**
+- Review packages now freeze the pre-package audit payload, store its chain head, and append the package event separately so the package hash cannot silently exclude a returned mutation.
+- `jaisl-review` provides an explicit operator step for recording human disposition and packaging a reviewed session; the main `jaisl` run still stops at REVIEW_PENDING.
+- Latest verified GitHub Actions JUnit evidence: **67/67 PASS**, 0 failures, 0 errors.
