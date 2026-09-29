@@ -11,18 +11,18 @@ Current state:
 - Evidence index: **30 verified / 0 review / 0 pending**
 - Real-data pilot preflight: **PASS**
 - Preflight blockers: **none**
-- Frozen v13 real-data assessment: **pending generation**
-- Blinded expert packet: **pending frozen assessment**
-- Expert ratings: **not started**
-- Jules v13 external code/evidence audit: **request prepared, not completed**
-- Claude v13 UI/research-claim re-audit: **request prepared, not completed**
+- v13 frozen assessment fingerprint: **reproduced**
+- assessment hash: `4ee3e039c35d1a9d49ba8496d3a81be514df414ec8c4514fe3a81d7abb324ab2`
+- blinded expert packet fingerprint: **reproduced**
+- packet hash: `ad6a033eee9d26a3633695901475f7b19a76b64a9be675dd3b762533b277fe27`
+- expert rating templates / completion gate: **implemented**
+- ordinal reliability (quadratic weighted kappa): **implemented in v14.0**
+- critical-error adjudication gate: **implemented in v14.0**
+- actual independent expert ratings: **not started**
+- Jules external code/evidence audit: **request prepared, not completed**
+- Claude UI/research-claim re-audit: **request prepared, not completed**
+- external validation: **not complete**
 
-The 30-case credential-backed evidence run is complete through preflight. This means the frozen cohort has traceable official-detail evidence and no unresolved identity/pending blockers.
+The credential-backed 30-case evidence pipeline is complete through preflight and frozen-fingerprint reproduction. The remaining validation work depends on actual independent reviewers and external audit results.
 
-It does **not** mean:
-- the system's legal conclusions are correct,
-- expert review is complete,
-- an external audit is complete,
-- the project is judicially certified.
-
-The next frozen artifact is the v13 real-data assessment tied to commit `3de937f3833e08c3e0c141444ae71fcbf9fc5148`.
+This status does not claim legal correctness, judicial certification, production approval, or completed external validation.
