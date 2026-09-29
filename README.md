@@ -1,4 +1,4 @@
-# Judicial AI Safety Lab v9.5
+# Judicial AI Safety Lab v10.0
 
 대한민국 사법·법률 분야 생성형 AI를 **위험평가 → 동일조건 검증 → 적대적 테스트 → 독립검증 → 법적 근거 변경감지 → 지속 모니터링 → 인간검토** 순서로 점검하는 연구용 PoC입니다.
 
@@ -207,3 +207,12 @@ External audit request files:
 - `jaisl-case-template` converts the committed 30-case discovery pool into normalized cases, verification mappings and expert-review templates.
 - Current real-data boundary remains unchanged: **0/30 API raw verified, 0/30 detail verified, 0/30 pilot-eligible** until LAW_OC-backed evidence is captured.
 - See [v9.5 expert-template flow](docs/V9_5_EXPERT_TEMPLATE_FLOW.md).
+
+
+## v10.0 — full-cohort pilot freeze + enrichment queue
+- The first real-data pilot now freezes **all 30 discovered public precedents** before outcome review, avoiding post-hoc case cherry-picking.
+- `jaisl-cohort` locks cohort membership, source IDs, cutoff and cohort hash; later exclusions require a new version.
+- `jaisl-enrichment` creates a deterministic 30-case LAW_OC work queue ordered by stable case ID.
+- A case leaves the enrichment queue only after API raw evidence and normalized detail are verified.
+- Current truthful state remains **30 discovered / 30 queued / 0 pilot-eligible** until LAW_OC-backed collection is performed.
+- See [v10 full-cohort pilot](docs/V10_FULL_COHORT_PILOT.md).
