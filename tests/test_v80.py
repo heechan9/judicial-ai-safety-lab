@@ -65,3 +65,23 @@ def test_validation_cli(tmp_path):
     ])
     result=json.loads(out.read_text(encoding="utf-8"))
     assert result["current_state"]=="EXTERNALLY_VALIDATED_PILOT"
+
+def test_raw_precedent_collection_never_persists_credential():
+    from judicial_ai_safety_lab.precedent_collect import collect_raw_precedents,verify_raw_collection
+    seen=[]
+    def fake(url):
+        seen.append(url)
+        return {"PrecSearch":{"totalCnt":"1","prec":[{"판례정보일련번호":"1"}]}}
+    result=collect_raw_precedents("손해배상",oc="top-secret",fetcher=fake,display=1,page=1)
+    assert verify_raw_collection(result)["valid"]
+    dumped=json.dumps(result,ensure_ascii=False)
+    assert "top-secret" not in dumped
+    assert result["credential_stored"] is False
+    assert "target=prec" in seen[0]
+
+def test_raw_precedent_collection_detects_tamper():
+    from judicial_ai_safety_lab.precedent_collect import collect_raw_precedents,verify_raw_collection
+    result=collect_raw_precedents("x",oc="secret",fetcher=lambda url:{"a":1})
+    result["raw_response"]["a"]=2
+    with pytest.raises(ValueError):
+        verify_raw_collection(result)
