@@ -196,3 +196,5 @@ External audit request files:
 - `jaisl-readiness` computes per-case missing evidence and allows `pilot_eligible=true` only when API raw evidence, normalized detail and frozen pilot selection are all present.
 - Current truthful real-data state: 30 public precedents collected, **0/30 pilot-eligible** until LAW_OC-backed raw collection and normalization are completed.
 - See [v9 case catalog](docs/V9_CASE_CATALOG.md) and [real-data progress](docs/REAL_DATA_PROGRESS.md).
+
+- Latest verified GitHub Actions JUnit evidence for v9.0: **99/99 PASS**, 0 failures, 0 errors.
