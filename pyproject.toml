@@ -3,7 +3,7 @@ requires=["setuptools>=68"]
 build-backend="setuptools.build_meta"
 [project]
 name="judicial-ai-safety-lab"
-version="13.5.0"
+version="14.0.0"
 requires-python=">=3.11"
 dependencies=[]
 [project.scripts]
@@ -33,6 +33,8 @@ jaisl-real-assessment="judicial_ai_safety_lab.real_assessment_cli:main"
 jaisl-real-expert-packet="judicial_ai_safety_lab.real_expert_packet_cli:main"
 jaisl-expert-rating-template="judicial_ai_safety_lab.expert_rating_template_cli:main"
 jaisl-expert-review-gate="judicial_ai_safety_lab.expert_review_gate_cli:main"
+jaisl-expert-reliability="judicial_ai_safety_lab.expert_reliability_cli:main"
+jaisl-expert-adjudication="judicial_ai_safety_lab.expert_adjudication_cli:main"
 [tool.pytest.ini_options]
 pythonpath=["src"]
 testpaths=["tests"]
