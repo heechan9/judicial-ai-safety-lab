@@ -105,3 +105,19 @@ def test_review_cli_rejects_unknown_finding_resolution():
         {"action_id":"A1","action_type":"CHECK_CONFLICT","target_ref":"X","rationale":"확인"}]}}}
     with pytest.raises(ValueError):
         review_assessment(report,disposition="검토",resolved_findings=["NOPE"])
+
+def test_packaged_payload_is_immutable_snapshot_of_prepackage_audit_log():
+    from judicial_ai_safety_lab.review_session import create_session,freeze_session,add_review_action,record_human_review,package_session,ReviewActionContract
+    s=create_session(session_id="S2",baseline_hash="b"*64,open_findings=("F1",))
+    freeze_session(s)
+    add_review_action(s,ReviewActionContract("A1","VERIFY_SOURCE","LAW-1","원본 확인"))
+    record_human_review(s,disposition="검토 완료",resolved_findings=("F1",))
+    p=package_session(s)
+    assert p["payload"]["audit_log"][-1]["event"]=="HUMAN_REVIEW_RECORDED"
+    assert p["package_event"]["event"]=="SESSION_PACKAGED"
+    assert all(x["event"]!="SESSION_PACKAGED" for x in p["payload"]["audit_log"])
+
+def test_review_session_requires_real_sha256_baseline():
+    from judicial_ai_safety_lab.review_session import create_session
+    with pytest.raises(ValueError):
+        create_session(session_id="S3",baseline_hash="g"*64)
