@@ -298,3 +298,5 @@ External audit request files:
 - `jaisl-expert-adjudication` blocks completion until every critical case has an explicit adjudication and no case remains confirmed/unresolved.
 - Real-data status is aligned with the reproducible v13 assessment and expert-packet fingerprints; actual independent ratings and Jules/Claude external audit results remain pending.
 - See [v14 expert-review protocol](docs/EXPERT_REVIEW_PROTOCOL_V140.md) and [paper evidence matrix](docs/PAPER_EVIDENCE_MATRIX_V140.md).
+
+- Verified v14.0 GitHub Actions JUnit evidence: **147/147 PASS**, 0 failures, 0 errors, 0 skipped.
