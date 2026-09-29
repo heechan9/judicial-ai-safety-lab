@@ -14,11 +14,13 @@ Current state:
 - Resumable batch detail collector: **implemented**
 - Discovery/detail identity reconciliation: **implemented**
 - Batch reconciliation + compact evidence index: **implemented**
+- Real-data pilot preflight gate: **implemented**
 - API raw evidence verification: **pending actual LAW_OC-backed run**
 - Normalized detail verification: **pending actual LAW_OC-backed run**
+- Pilot preflight ready: **no**
 - Pilot-eligible cases: **0 / 30**
 - Expert-packet-ready cases: **0 / 30**
 - Expert ratings: **not started**
 
-The software path for collecting and reconciling all 30 cases is now implemented.
-The project still does not claim the pilot is complete until the credential-backed run actually occurs.
+The software path now reaches a fail-closed pilot preflight gate.
+The project still does not claim real-data validation until the 30-case credential-backed evidence run is actually completed.
