@@ -1,4 +1,4 @@
-# Judicial AI Safety Lab v7.5
+# Judicial AI Safety Lab v8.0
 
 대한민국 사법·법률 분야 생성형 AI를 **위험평가 → 동일조건 검증 → 적대적 테스트 → 독립검증 → 법적 근거 변경감지 → 지속 모니터링 → 인간검토** 순서로 점검하는 연구용 PoC입니다.
 
@@ -169,3 +169,13 @@ External audit request files:
 - **External Audit Registry** accepts only traceable audit records with reviewer/tool, timestamp, exact target commit, scope, evidence reference and explicit COMPLETED/PARTIAL/FAILED status.
 - `jaisl-audit` summarizes whether completed code/UI audits actually exist instead of inferring completion from prepared prompts.
 - The project still requires a real `LAW_OC` credential and actual reviewer responses before the real-data/expert/external-validation states can move from READY to COMPLETE.
+
+
+## v8.0 — external validation orchestration
+- **External Validation Gate** advances only when required evidence artifacts actually exist and validate; prepared code/templates never count as completed validation.
+- **Credential-safe precedent collection** stores official API responses and canonical hashes without persisting `LAW_OC`.
+- `jaisl-precedent-collect` captures raw official precedent search responses for later normalization and frozen selection.
+- `jaisl-expert-packet` builds a blinded reviewer packet from frozen case outputs.
+- `jaisl-validation` computes the current research validation state from internal CI, real-data manifest, frozen pilot selection, expert-review summary, completed code-audit state and claim-audit state.
+- Truthful current status remains: internal framework verified; real-data pilot, expert review and completed external code audit are still pending actual external inputs.
+- See [v8 real-data runbook](docs/REAL_DATA_RUNBOOK_V8.md) and [external validation status](docs/EXTERNAL_VALIDATION_STATUS.md).
