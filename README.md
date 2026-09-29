@@ -275,8 +275,8 @@ External audit request files:
 - Added `jaisl-real-assessment` to freeze all 30 verified cases into one assessment artifact tied to an exact 40-character Git SHA.
 - Added `jaisl-real-expert-packet` to build the blinded expert-review packet only from a frozen real assessment.
 - The v13.0 code target is `3de937f3833e08c3e0c141444ae71fcbf9fc5148`; GitHub Actions JUnit evidence is **136/136 PASS**, 0 failures, 0 errors.
-- Jules and Claude v13 audit requests are prepared and pinned to the same code target, but are **not** marked complete without saved reviewable results.
-- Current next boundary: generate `real-assessment-v1.json` on the live PC evidence, then generate the blinded expert packet and begin independent expert review.
+- Jules and Claude external audit requests are prepared; the current v14 requests remain **not complete** until saved reviewable results exist.
+- The v13 assessment and blinded packet fingerprints have been deterministically reproduced from the saved evidence contract; the remaining validation boundary is actual independent expert review and completed external audits.
 - See [v13 real-data status](docs/V13_REAL_DATA_STATUS.md).
 
 
@@ -297,6 +297,6 @@ External audit request files:
 - `jaisl-expert-reliability` reports per-dimension ordinal agreement; it is a descriptive pilot statistic, not proof of legal correctness.
 - `jaisl-expert-adjudication` blocks completion until every critical case has an explicit adjudication and no case remains confirmed/unresolved.
 - Real-data status is aligned with the reproducible v13 assessment and expert-packet fingerprints; actual independent ratings and Jules/Claude external audit results remain pending.
-- See [v14 expert-review protocol](docs/EXPERT_REVIEW_PROTOCOL_V140.md) and [paper evidence matrix](docs/PAPER_EVIDENCE_MATRIX_V140.md).
+- See [v14 expert-review protocol](docs/EXPERT_REVIEW_PROTOCOL_V140.md), [paper evidence matrix](docs/PAPER_EVIDENCE_MATRIX_V140.md), [OpenAI internal audit v14.0](docs/audits/OPENAI_CODE_AUDIT_V140.md), [Jules v14 request](docs/audits/JULES_CODE_AUDIT_REQUEST_V140.md), and [Claude v14 request](docs/audits/CLAUDE_UI_REAUDIT_REQUEST_V140.md).
 
 - Verified v14.0 GitHub Actions JUnit evidence: **147/147 PASS**, 0 failures, 0 errors, 0 skipped.
