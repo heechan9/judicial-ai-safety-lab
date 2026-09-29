@@ -239,3 +239,5 @@ External audit request files:
 - `jaisl-detail-batch`, `jaisl-batch-reconcile` and `jaisl-evidence-index` complete the software path from the 30-case queue to per-case verified-detail readiness.
 - Current truthful external-data status remains **0/30 verified** until an actual LAW_OC-backed batch run is executed.
 - See [v11 batch detail pipeline](docs/V11_BATCH_DETAIL_PIPELINE.md).
+
+- Latest verified GitHub Actions JUnit evidence for v11.0: **123/123 PASS**, 0 failures, 0 errors.
