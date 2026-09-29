@@ -6,7 +6,6 @@ It does not predict judgments, sentences, verdicts, or legal correctness.
 import hashlib,json
 from .public_discovery import validate_public_discovery
 from .batch_reconcile import reconcile_discovery_batch
-from .evidence_index import build_evidence_index
 from .precedent_normalization import NormalizedPrecedentCase
 from .scenario_mapping import build_default_mappings
 
@@ -31,12 +30,10 @@ def build_real_case_assessment(discovery,detail_envelopes,preflight,*,target_com
         raise ValueError("target_commit must be a full lowercase Git SHA")
 
     batch=reconcile_discovery_batch(discovery,detail_envelopes=detail_envelopes)
-    index=build_evidence_index(batch)
     if batch["summary"]!={"total":30,"verified_detail_ready":30,"identity_review_required":0,"detail_pending":0}:
         raise ValueError("all 30 cases must be VERIFIED_DETAIL_READY")
 
     by_prec={str(k):v for k,v in detail_envelopes.items()}
-    by_source={row["source_id"]:row for row in discovery["cases"]}
     ordered=sorted(discovery["cases"],key=lambda x:(x["domain"],x["decision_date"],x["source_id"]))
     cases=[]; expert_cases=[]
     for i,row in enumerate(ordered,1):
