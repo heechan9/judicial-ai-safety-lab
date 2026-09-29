@@ -50,3 +50,25 @@ def test_review_simulator_prefers_fewer_open_findings_then_cost():
 def test_review_simulator_cannot_hide_new_uncertainty():
     x=simulate_review_path(("u1",),[ReviewAction("A",resolves=("u1",),introduces=("u2",),cost=1)],max_depth=1)
     assert x["best_path"]["open"]==("u2",)
+
+def test_cli_integrates_v50_verification_planning(tmp_path,monkeypatch,capsys):
+    import json
+    from judicial_ai_safety_lab import cli
+    data=tmp_path/"data"; data.mkdir()
+    (data/"legal_sources.sample.json").write_text(json.dumps([
+      {"source_id":"S1","institution":"moleg","source_type":"statute","title":"합성 법령","version":"1",
+       "status":"effective","checksum":"demo"}],ensure_ascii=False),encoding="utf-8")
+    (data/"scenarios.json").write_text(json.dumps([
+      {"scenario_id":"J1","category":"normal","baseline_pass":True,"ai_pass":True},
+      {"scenario_id":"J2","category":"source_change","baseline_pass":True,"ai_pass":False,"source_changed":True}
+    ]),encoding="utf-8")
+    monkeypatch.setattr(cli,"ROOT",tmp_path)
+    monkeypatch.setattr(cli,"render",lambda report,path: None)
+    monkeypatch.setattr(cli,"save_session",lambda *args,**kwargs: None)
+    cli.main()
+    report=json.loads((tmp_path/"results/assessment.json").read_text(encoding="utf-8"))
+    vp=report["verification_planning"]
+    assert vp["research_fixture_only"]
+    assert vp["frozen_baseline"]["status"]=="FROZEN"
+    assert vp["next_review_plan"]["selected_next"]=="review-source-change"
+    assert vp["claim_audit"]["public_review_required"]
