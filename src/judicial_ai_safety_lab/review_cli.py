@@ -12,9 +12,14 @@ from .review_session import (
     record_human_review,package_session,
 )
 from .review_policy import guard_review_plan
+from .assessment_contract import validate_assessment_contract
 
 def review_assessment(report,*,disposition,resolved_findings=()):
-    vp=report.get("verification_planning") if isinstance(report,dict) else None
+    if not isinstance(report,dict): raise ValueError("assessment must be an object")
+    contract=report.get("assessment_contract")
+    if not isinstance(contract,dict): raise ValueError("assessment lacks assessment_contract")
+    validate_assessment_contract(contract)
+    vp=report.get("verification_planning")
     if not isinstance(vp,dict): raise ValueError("assessment lacks verification_planning")
     baseline=vp.get("frozen_baseline") or {}
     registry=vp.get("finding_registry") or {}
@@ -22,6 +27,8 @@ def review_assessment(report,*,disposition,resolved_findings=()):
     if baseline.get("status")!="FROZEN" or len(baseline.get("baseline_hash",""))!=64:
         raise ValueError("assessment lacks a valid frozen baseline")
     open_ids=registry.get("open_ids")
+    if contract["baseline_hash"]!=baseline["baseline_hash"]: raise ValueError("assessment contract baseline mismatch")
+    if contract["finding_ids"]!=open_ids: raise ValueError("assessment contract finding mismatch")
     if not isinstance(open_ids,list): raise ValueError("assessment lacks finding registry")
     actions=prior.get("actions")
     if not isinstance(actions,list) or not actions: raise ValueError("assessment lacks review actions")
