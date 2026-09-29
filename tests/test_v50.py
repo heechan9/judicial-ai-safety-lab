@@ -72,3 +72,18 @@ def test_cli_integrates_v50_verification_planning(tmp_path,monkeypatch,capsys):
     assert vp["frozen_baseline"]["status"]=="FROZEN"
     assert vp["next_review_plan"]["selected_next"]=="review-source-change"
     assert vp["claim_audit"]["public_review_required"]
+
+def test_evidence_package_rejects_symlink_and_overwrite(tmp_path):
+    target=tmp_path/"real.txt"; target.write_text("x",encoding="utf-8")
+    link=tmp_path/"link.txt"
+    try:
+        link.symlink_to(target)
+    except OSError:
+        pytest.skip("symlink unsupported")
+    with pytest.raises(ValueError):
+        build_manifest(tmp_path,["link.txt"],run_id="R",status="COMPLETE")
+    m=build_manifest(tmp_path,["real.txt"],run_id="R",status="COMPLETE")
+    out=tmp_path/"manifest.json"
+    write_manifest(out,m)
+    with pytest.raises(FileExistsError):
+        write_manifest(out,m)
