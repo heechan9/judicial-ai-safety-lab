@@ -48,3 +48,14 @@ def test_cohort_cli(tmp_path):
                  "--output",str(out)])
     c=json.loads(out.read_text(encoding="utf-8"))
     assert c["member_count"]==30 and c["membership_locked"]
+
+def test_enrichment_cli(tmp_path):
+    from judicial_ai_safety_lab.catalog_cli import main as catalog_main
+    from judicial_ai_safety_lab.enrichment_cli import main as enrichment_main
+    source=Path(__file__).resolve().parents[1]/"data/pilot/public_precedent_discovery_v1.json"
+    catalog=tmp_path/"catalog.json"
+    catalog_main(["--discovery",str(source),"--output",str(catalog)])
+    out=tmp_path/"queue.json"
+    enrichment_main(["--catalog",str(catalog),"--output",str(out)])
+    q=json.loads(out.read_text(encoding="utf-8"))
+    assert q["pending_count"]==30
