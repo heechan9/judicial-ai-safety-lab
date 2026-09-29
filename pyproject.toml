@@ -27,6 +27,7 @@ jaisl-precedent-detail="judicial_ai_safety_lab.detail_cli:main"
 jaisl-reconcile="judicial_ai_safety_lab.reconcile_cli:main"
 jaisl-batch-reconcile="judicial_ai_safety_lab.batch_reconcile_cli:main"
 jaisl-evidence-index="judicial_ai_safety_lab.evidence_index_cli:main"
+jaisl-detail-batch="judicial_ai_safety_lab.detail_batch_cli:main"
 [tool.pytest.ini_options]
 pythonpath=["src"]
 testpaths=["tests"]
