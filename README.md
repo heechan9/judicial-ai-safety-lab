@@ -1,4 +1,4 @@
-# Judicial AI Safety Lab v12.5
+# Judicial AI Safety Lab v13.0
 
 대한민국 사법·법률 분야 생성형 AI를 **위험평가 → 동일조건 검증 → 적대적 테스트 → 독립검증 → 법적 근거 변경감지 → 지속 모니터링 → 인간검토** 순서로 점검하는 연구용 PoC입니다.
 
@@ -248,10 +248,10 @@ External audit request files:
 - The gate rejects missing/extra sources, pending details, identity-review cases and unknown evidence states.
 - `ready_for_expert_packet` intentionally remains false even when all 30 details are verified, because expert packets require later frozen JAISL outputs.
 - This separates **software readiness**, **evidence readiness**, and **expert-review readiness** as distinct states.
-- Current truthful state without a LAW_OC-backed run remains **0 verified / 30 pending / preflight not ready**.
+- Live PC evidence now has **30/30 VERIFIED_DETAIL_READY**, **0 pending**, **0 identity-review**, and **preflight PASS**.
 - See [v11.5 pilot preflight](docs/V11_5_PILOT_PREFLIGHT.md).
 
-- Latest verified GitHub Actions JUnit evidence for v11.5: **127/127 PASS**, 0 failures, 0 errors.
+- Historical v11.5 GitHub Actions JUnit evidence: **127/127 PASS**, 0 failures, 0 errors.
 
 
 ## v12.0 — fail-closed official detail payload validation
@@ -268,3 +268,13 @@ External audit request files:
 - Two used a public-list summary ending in `등` while the official detail expanded the same charge list.
 - v12.5 accepts only conservative equivalence: exact match, trailing official annotation, or literal-prefix `등` expansion. Case-number and precedent-ID checks remain strict.
 - Non-prefix reorderings or unrelated title differences still route to `IDENTITY_REVIEW_REQUIRED`.
+
+
+## v13.0 — frozen real-data assessment + expert handoff
+- Live LAW_OC-backed official-detail evidence reached **30/30 VERIFIED_DETAIL_READY** with **0 failed**, **0 pending**, **0 identity-review**, and **preflight PASS**.
+- Added `jaisl-real-assessment` to freeze all 30 verified cases into one assessment artifact tied to an exact 40-character Git SHA.
+- Added `jaisl-real-expert-packet` to build the blinded expert-review packet only from a frozen real assessment.
+- The v13.0 code target is `3de937f3833e08c3e0c141444ae71fcbf9fc5148`; GitHub Actions JUnit evidence is **136/136 PASS**, 0 failures, 0 errors.
+- Jules and Claude v13 audit requests are prepared and pinned to the same code target, but are **not** marked complete without saved reviewable results.
+- Current next boundary: generate `real-assessment-v1.json` on the live PC evidence, then generate the blinded expert packet and begin independent expert review.
+- See [v13 real-data status](docs/V13_REAL_DATA_STATUS.md).
