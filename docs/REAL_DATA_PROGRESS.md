@@ -24,3 +24,7 @@ Current state:
 
 The software path now reaches a fail-closed pilot preflight gate.
 The project still does not claim real-data validation until the 30-case credential-backed evidence run is actually completed.
+
+
+## Live PC validation finding (v12.0)
+A credential placeholder was intentionally/accidentally supplied during the first live batch attempt. The upstream API returned error objects with `result`/`msg`; the pre-v12 collector incorrectly counted those hashable JSON objects as collected evidence. v12.0 fixes this by requiring an actual precedent-detail object and exact precedent identity match before an envelope can validate. The 30 pre-fix raw files are invalid research evidence and must be deleted before recollection.
