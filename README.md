@@ -250,3 +250,5 @@ External audit request files:
 - This separates **software readiness**, **evidence readiness**, and **expert-review readiness** as distinct states.
 - Current truthful state without a LAW_OC-backed run remains **0 verified / 30 pending / preflight not ready**.
 - See [v11.5 pilot preflight](docs/V11_5_PILOT_PREFLIGHT.md).
+
+- Latest verified GitHub Actions JUnit evidence for v11.5: **127/127 PASS**, 0 failures, 0 errors.
