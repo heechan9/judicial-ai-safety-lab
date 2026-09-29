@@ -1,0 +1,311 @@
+{
+  "schema": "jaisl.public-precedent-discovery.v1",
+  "source_site": "법제처 국가법령정보센터",
+  "discovery_method": "public web discovery from official precedent pages",
+  "discovered_at": "2026-09-29",
+  "discovery_only": true,
+  "pilot_selection_frozen": false,
+  "note": "Actual public official precedents discovered without LAW_OC. This is a candidate pool only, not the frozen real-data pilot and not an API raw-response manifest.",
+  "cases": [
+    {
+      "source_id": "WEBPREC-621987",
+      "prec_seq": "621987",
+      "domain": "civil",
+      "title": "손해배상(기)",
+      "case_number": "2023다228244",
+      "decision_date": "2026-05-14",
+      "court": "대법원",
+      "source_url": "https://www.law.go.kr/precInfoP.do?precSeq=621987"
+    },
+    {
+      "source_id": "WEBPREC-617163",
+      "prec_seq": "617163",
+      "domain": "civil",
+      "title": "손해배상(기)·손해배상(기)",
+      "case_number": "2022다284711, 284728",
+      "decision_date": "2026-02-12",
+      "court": "대법원",
+      "source_url": "https://www.law.go.kr/precStmdInfoP.do?precSeq=617163"
+    },
+    {
+      "source_id": "WEBPREC-616527",
+      "prec_seq": "616527",
+      "domain": "civil",
+      "title": "손해배상(국)",
+      "case_number": "2023다285162",
+      "decision_date": "2026-01-22",
+      "court": "대법원",
+      "source_url": "https://www.law.go.kr/precInfoP.do?precSeq=616527"
+    },
+    {
+      "source_id": "WEBPREC-616249",
+      "prec_seq": "616249",
+      "domain": "civil",
+      "title": "손해배상(기)",
+      "case_number": "2022다287284",
+      "decision_date": "2026-01-29",
+      "court": "대법원",
+      "source_url": "https://www.law.go.kr/precInfoP.do?precSeq=616249"
+    },
+    {
+      "source_id": "WEBPREC-618153",
+      "prec_seq": "618153",
+      "domain": "civil",
+      "title": "손해배상(국)",
+      "case_number": "2025다212519",
+      "decision_date": "2025-10-30",
+      "court": "대법원",
+      "source_url": "https://www.law.go.kr/LSW/precInfoP.do?precSeq=618153"
+    },
+    {
+      "source_id": "WEBPREC-609555",
+      "prec_seq": "609555",
+      "domain": "civil",
+      "title": "손해배상(기)·손해배상(기)·손해배상(기)",
+      "case_number": "2021다298799, 298805, 298812",
+      "decision_date": "2025-03-13",
+      "court": "대법원",
+      "source_url": "https://www.law.go.kr/LSW/precInfoP.do?precSeq=609555"
+    },
+    {
+      "source_id": "WEBPREC-613161",
+      "prec_seq": "613161",
+      "domain": "civil",
+      "title": "건물인도·손해배상(기)",
+      "case_number": "2024다305605, 305612",
+      "decision_date": "2025-11-20",
+      "court": "대법원",
+      "source_url": "https://www.law.go.kr/precInfoP.do?precSeq=613161"
+    },
+    {
+      "source_id": "WEBPREC-615681",
+      "prec_seq": "615681",
+      "domain": "civil",
+      "title": "손해배상(기)",
+      "case_number": "2024다296213",
+      "decision_date": "2025-08-14",
+      "court": "대법원",
+      "source_url": "https://www.law.go.kr/LSW/precInfoP.do?precSeq=615681"
+    },
+    {
+      "source_id": "WEBPREC-615677",
+      "prec_seq": "615677",
+      "domain": "civil",
+      "title": "손해배상(기)",
+      "case_number": "2024다228449",
+      "decision_date": "2025-08-14",
+      "court": "대법원",
+      "source_url": "https://www.law.go.kr/LSW/precInfoP.do?precSeq=615677"
+    },
+    {
+      "source_id": "WEBPREC-618211",
+      "prec_seq": "618211",
+      "domain": "civil",
+      "title": "손해배상(기)",
+      "case_number": "2025다211583",
+      "decision_date": "2025-10-16",
+      "court": "대법원",
+      "source_url": "https://www.law.go.kr/LSW/precInfoP.do?precSeq=618211"
+    },
+    {
+      "source_id": "WEBPREC-613215",
+      "prec_seq": "613215",
+      "domain": "civil",
+      "title": "부당이득금",
+      "case_number": "2024다286933",
+      "decision_date": "2025-09-25",
+      "court": "대법원",
+      "source_url": "https://www.law.go.kr/LSW/precInfoP.do?precSeq=613215"
+    },
+    {
+      "source_id": "WEBPREC-618137",
+      "prec_seq": "618137",
+      "domain": "civil",
+      "title": "근로자지위확인등",
+      "case_number": "2021다218755",
+      "decision_date": "2025-09-25",
+      "court": "대법원",
+      "source_url": "https://law.go.kr/precInfoP.do?precSeq=618137"
+    },
+    {
+      "source_id": "WEBPREC-608455",
+      "prec_seq": "608455",
+      "domain": "civil",
+      "title": "부당이득금",
+      "case_number": "2025다212297",
+      "decision_date": "2025-08-14",
+      "court": "대법원",
+      "source_url": "https://www.law.go.kr/LSW/precInfoP.do?precSeq=608455"
+    },
+    {
+      "source_id": "WEBPREC-609483",
+      "prec_seq": "609483",
+      "domain": "civil",
+      "title": "부당이득금",
+      "case_number": "2024다290079",
+      "decision_date": "2025-02-27",
+      "court": "대법원",
+      "source_url": "https://www.law.go.kr/LSW/precInfoP.do?precSeq=609483"
+    },
+    {
+      "source_id": "WEBPREC-613219",
+      "prec_seq": "613219",
+      "domain": "civil",
+      "title": "부당이득금",
+      "case_number": "2025다210104",
+      "decision_date": "2025-11-20",
+      "court": "대법원",
+      "source_url": "https://www.law.go.kr/LSW/precInfoP.do?precSeq=613219"
+    },
+    {
+      "source_id": "WEBPREC-618191",
+      "prec_seq": "618191",
+      "domain": "civil",
+      "title": "부당이득금",
+      "case_number": "2022다248746",
+      "decision_date": "2025-09-11",
+      "court": "대법원",
+      "source_url": "https://www.law.go.kr/LSW/precInfoP.do?precSeq=618191"
+    },
+    {
+      "source_id": "WEBPREC-609547",
+      "prec_seq": "609547",
+      "domain": "civil",
+      "title": "부당이득금",
+      "case_number": "2023다264462",
+      "decision_date": "2025-03-13",
+      "court": "대법원",
+      "source_url": "https://www.law.go.kr/LSW/precInfoP.do?precSeq=609547"
+    },
+    {
+      "source_id": "WEBPREC-618193",
+      "prec_seq": "618193",
+      "domain": "civil",
+      "title": "부당이득금",
+      "case_number": "2025다209886",
+      "decision_date": "2025-09-25",
+      "court": "대법원",
+      "source_url": "https://www.law.go.kr/LSW/precInfoP.do?precSeq=618193"
+    },
+    {
+      "source_id": "WEBPREC-618145",
+      "prec_seq": "618145",
+      "domain": "civil",
+      "title": "부당이득금",
+      "case_number": "2024다320796",
+      "decision_date": "2025-09-25",
+      "court": "대법원",
+      "source_url": "https://www.law.go.kr/LSW/precInfoP.do?precSeq=618145"
+    },
+    {
+      "source_id": "WEBPREC-614317",
+      "prec_seq": "614317",
+      "domain": "civil",
+      "title": "부당이득금",
+      "case_number": "2025다211151",
+      "decision_date": "2025-07-03",
+      "court": "대법원",
+      "source_url": "https://www.law.go.kr/LSW/precInfoP.do?precSeq=614317"
+    },
+    {
+      "source_id": "WEBPREC-616529",
+      "prec_seq": "616529",
+      "domain": "criminal",
+      "title": "업무방해·컴퓨터등사용사기(인정된죄명:사기)",
+      "case_number": "2022도1862",
+      "decision_date": "2026-01-29",
+      "court": "대법원",
+      "source_url": "https://www.law.go.kr/precStmdInfoP.do?precSeq=616529"
+    },
+    {
+      "source_id": "WEBPREC-618227",
+      "prec_seq": "618227",
+      "domain": "criminal",
+      "title": "특정범죄가중처벌등에관한법률위반(허위세금계산서교부등) 등",
+      "case_number": "2024도11156",
+      "decision_date": "2026-02-26",
+      "court": "대법원",
+      "source_url": "https://www.law.go.kr/LSW/precInfoP.do?precSeq=618227"
+    },
+    {
+      "source_id": "WEBPREC-609585",
+      "prec_seq": "609585",
+      "domain": "criminal",
+      "title": "사기·업무방해",
+      "case_number": "2024도18174",
+      "decision_date": "2025-09-25",
+      "court": "대법원",
+      "source_url": "https://www.law.go.kr/precInfoP.do?precSeq=609585"
+    },
+    {
+      "source_id": "WEBPREC-606769",
+      "prec_seq": "606769",
+      "domain": "criminal",
+      "title": "사기",
+      "case_number": "2024도12209",
+      "decision_date": "2025-03-13",
+      "court": "대법원",
+      "source_url": "https://www.law.go.kr/LSW/precInfoP.do?precSeq=606769"
+    },
+    {
+      "source_id": "WEBPREC-621921",
+      "prec_seq": "621921",
+      "domain": "criminal",
+      "title": "사기·업무상배임·민간임대주택에관한특별법위반 등",
+      "case_number": "2025도4777",
+      "decision_date": "2025-12-11",
+      "court": "대법원",
+      "source_url": "https://www.law.go.kr/LSW/precInfoP.do?precSeq=621921"
+    },
+    {
+      "source_id": "WEBPREC-612091",
+      "prec_seq": "612091",
+      "domain": "criminal",
+      "title": "사기·범죄수익은닉의규제및처벌등에관한법률위반·주민등록법위반",
+      "case_number": "2025도486",
+      "decision_date": "2025-05-29",
+      "court": "대법원",
+      "source_url": "https://www.law.go.kr/LSW/precInfoP.do?precSeq=612091"
+    },
+    {
+      "source_id": "WEBPREC-612093",
+      "prec_seq": "612093",
+      "domain": "criminal",
+      "title": "사기·주민등록법위반·사문서위조·위조사문서행사",
+      "case_number": "2024도15240",
+      "decision_date": "2025-06-26",
+      "court": "대법원",
+      "source_url": "https://www.law.go.kr/LSW/precInfoP.do?precSeq=612093"
+    },
+    {
+      "source_id": "WEBPREC-605767",
+      "prec_seq": "605767",
+      "domain": "criminal",
+      "title": "업무방해",
+      "case_number": "2024도16921",
+      "decision_date": "2025-04-15",
+      "court": "대법원",
+      "source_url": "https://www.law.go.kr/LSW/precInfoP.do?precSeq=605767"
+    },
+    {
+      "source_id": "WEBPREC-609495",
+      "prec_seq": "609495",
+      "domain": "criminal",
+      "title": "업무방해·재물손괴",
+      "case_number": "2022도1665",
+      "decision_date": "2025-09-11",
+      "court": "대법원",
+      "source_url": "https://www.law.go.kr/LSW/precInfoP.do?precSeq=609495"
+    },
+    {
+      "source_id": "WEBPREC-613017",
+      "prec_seq": "613017",
+      "domain": "criminal",
+      "title": "업무방해",
+      "case_number": "2025도8714",
+      "decision_date": "2025-09-11",
+      "court": "대법원",
+      "source_url": "https://law.go.kr/LSW/precInfoP.do?precSeq=613017"
+    }
+  ]
+}
