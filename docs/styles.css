@@ -10,3 +10,13 @@
 
 /* v3.5 uncertainty states */
 .uncertainty-strip{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}.uncertainty-strip span{display:inline-flex;align-items:center;min-height:34px;padding:6px 10px;border:1px solid var(--line);border-radius:999px;background:#f8f4ec;font:700 12px system-ui;color:var(--navy)}
+
+/* Dike visual identity: navy, ivory and restrained gold. */
+:root{--navy:#071f36;--navy2:#12334c;--paper:#f7f4ed;--gold:#b7985c;--line:#ddd6c7}
+body{background:var(--paper);font-family:system-ui,-apple-system,"Noto Sans KR",sans-serif;line-height:1.65}
+.brand-banner{max-width:1440px;margin:auto}.brand-banner img{display:block;width:100%;height:auto}
+.top{background:#051e35}.topin{padding-top:24px;padding-bottom:28px}.top h1{font-family:Georgia,"Noto Serif KR",serif;font-size:clamp(26px,3vw,38px)}
+.top p{max-width:900px}.top .notice{background:#ffffff09;border-color:#b7985c77;color:#f4e9d3;font-weight:400;line-height:1.7}
+.panel,.card,.plainhero{box-shadow:none;border-radius:12px}.nav{gap:4px;border-bottom:1px solid var(--line);padding-bottom:12px}.nav button{font-size:14px;padding:12px 18px;border-color:transparent;background:transparent}.nav button.active{background:var(--navy);color:#fff2d8}
+.pilot-status{padding:32px;background:#fffdf8;border:1px solid var(--line);border-top:3px solid var(--gold);border-radius:12px;margin-bottom:32px}.pilot-status small,.section-label{color:#71572e;font-size:12px;font-weight:700;letter-spacing:.08em}.pilot-status h2{font-family:Georgia,"Noto Serif KR",serif;color:var(--navy);font-size:clamp(25px,3vw,36px);line-height:1.4;margin:10px 0}.pilot-status p{color:#5d5b56;font-size:14px}.pilot-status dl{display:grid;grid-template-columns:repeat(3,1fr);margin:26px 0 16px;gap:20px}.pilot-status dl>div{border-top:1px solid var(--line);padding-top:16px}.pilot-status dt{font-size:13px;color:#68645d}.pilot-status dd{margin:4px 0;font-size:38px;font-weight:600;color:var(--navy)}.pilot-status dd span{font-size:16px;font-weight:400}.pilot-status dd.status-text{font-size:23px;padding-top:10px}.pilot-status .pilot-boundary{font-size:12px;margin-bottom:0}.section-label{margin-bottom:12px}.skip-link{position:absolute;left:12px;top:-80px;background:#fff;padding:12px;z-index:30}.skip-link:focus{top:12px}.evidence dd{overflow-wrap:anywhere}button,summary{min-height:44px}
+@media(max-width:600px){.pilot-status{padding:22px}.pilot-status dl{grid-template-columns:1fr;gap:12px}.pilot-status dl>div{display:flex;justify-content:space-between;align-items:center}.pilot-status dd{font-size:28px}.pilot-status dd.status-text{font-size:19px;padding:0}.brand-banner{overflow:hidden}.topin{padding-top:18px}.nav button{padding:10px 12px}th,td{padding:8px;font-size:12px}}

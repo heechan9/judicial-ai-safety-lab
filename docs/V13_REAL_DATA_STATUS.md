@@ -63,3 +63,7 @@ Do not substitute placeholders such as `FULL_SHA` or `TARGET_SHA`; the assessmen
 - external validation: **not complete**
 
 Prepared audit requests are not counted as completed audits.
+
+## 2026-09-29 operator rerun confirmation
+
+The supplied PC console log reports case_count=30, verified_count=30, frozen=true, and expert_packet_ready=true. Its assessment hash matches the fingerprint above. The existing expert packet reports 30 cases and the same frozen target commit and packet hash documented above. A repeat packet-generation command stopped with FileExistsError because exclusive creation protects the existing file. This is not a failed assessment. Raw artifact bytes were not independently reloaded in this update; this confirmation is scoped to the supplied console output. Actual expert ratings remain pending.
