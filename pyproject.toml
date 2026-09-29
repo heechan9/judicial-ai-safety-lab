@@ -3,7 +3,7 @@ requires=["setuptools>=68"]
 build-backend="setuptools.build_meta"
 [project]
 name="judicial-ai-safety-lab"
-version="8.0.0"
+version="8.5.0"
 requires-python=">=3.11"
 dependencies=[]
 [project.scripts]
@@ -17,6 +17,7 @@ jaisl-audit="judicial_ai_safety_lab.audit_cli:main"
 jaisl-expert-packet="judicial_ai_safety_lab.expert_packet_cli:main"
 jaisl-validation="judicial_ai_safety_lab.validation_cli:main"
 jaisl-precedent-collect="judicial_ai_safety_lab.precedent_collect_cli:main"
+jaisl-discovery="judicial_ai_safety_lab.discovery_cli:main"
 [tool.pytest.ini_options]
 pythonpath=["src"]
 testpaths=["tests"]
