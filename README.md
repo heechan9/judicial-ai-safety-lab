@@ -1,4 +1,4 @@
-# Judicial AI Safety Lab v6.0
+# Judicial AI Safety Lab v6.5
 
 대한민국 사법·법률 분야 생성형 AI를 **위험평가 → 동일조건 검증 → 적대적 테스트 → 독립검증 → 법적 근거 변경감지 → 지속 모니터링 → 인간검토** 순서로 점검하는 연구용 PoC입니다.
 
@@ -141,3 +141,12 @@ External audit request files:
 - Review packages now freeze the pre-package audit payload, store its chain head, and append the package event separately so the package hash cannot silently exclude a returned mutation.
 - `jaisl-review` provides an explicit operator step for recording human disposition and packaging a reviewed session; the main `jaisl` run still stops at REVIEW_PENDING.
 - Latest verified GitHub Actions JUnit evidence: **67/67 PASS**, 0 failures, 0 errors.
+
+
+## v6.5 — strict handoff and package verification
+- Machine-readable **Assessment Contract** freezes the automated handoff at REVIEW_PENDING and forbids pre-filled human disposition.
+- `jaisl-review` now refuses assessments whose contract baseline/finding set does not match the report body.
+- New **Review Package Verifier** recomputes the package hash, validates the pre-package audit chain, checks the package-event predecessor/reference, and validates the final chain summary.
+- New `jaisl-verify` CLI verifies packaged human-review records without trusting stored summary fields.
+- Package integrity remains separate from legal correctness, operator identity, external notarization, and independent verification.
+- Latest v6.5 code is under GitHub Actions verification; completion status is recorded only after CI finishes.
