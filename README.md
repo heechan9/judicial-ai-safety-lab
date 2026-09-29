@@ -94,7 +94,7 @@ Anthropic Claude의 독립 UI/UX·정보구조 감사 finding을 검토해 v2.5 
 - UNCERTAIN state made reachable and tested separately from CONFLICTING / CHANGED / UNSUPPORTED.
 - Governance loop now rejects failed scenarios outside the affected set.
 - GitHub Actions CI added with retained JUnit artifact.
-- Latest verified CI on v4.0 code: **33/33 tests PASS**.
+- Latest verified CI on v4.0 code: **43/43 tests PASS**.
 
 External audit request files:
 - [Jules code audit request](docs/audits/JULES_CODE_AUDIT_REQUEST_V40.md)
@@ -111,4 +111,4 @@ External audit request files:
 - **Frozen Evaluation Baseline** detects post-hoc changes to source snapshots, scenario manifests, model/prompt identifiers, or evaluation contracts.
 - **Environment Fingerprint** records reproducibility metadata without claiming the same historical machine/environment.
 - **Public Release Privacy Guard** distinguishes current public cleanup from unverified Git history, prior branches/copies, and external caches.
-- v4.5 keeps planning strictly on the **verification/review path**, not judgment or sentencing recommendation.
+- v4.5 keeps planning strictly on the **verification/review path**, not judgment or sentencing recommendation.\n- Latest GitHub Actions verification: **43/43 PASS**, 0 failures, 0 errors.
