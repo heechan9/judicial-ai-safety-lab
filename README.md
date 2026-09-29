@@ -1,4 +1,4 @@
-# Judicial AI Safety Lab v10.0
+# Judicial AI Safety Lab v10.5
 
 대한민국 사법·법률 분야 생성형 AI를 **위험평가 → 동일조건 검증 → 적대적 테스트 → 독립검증 → 법적 근거 변경감지 → 지속 모니터링 → 인간검토** 순서로 점검하는 연구용 PoC입니다.
 
@@ -216,3 +216,13 @@ External audit request files:
 - A case leaves the enrichment queue only after API raw evidence and normalized detail are verified.
 - Current truthful state remains **30 discovered / 30 queued / 0 pilot-eligible** until LAW_OC-backed collection is performed.
 - See [v10 full-cohort pilot](docs/V10_FULL_COHORT_PILOT.md).
+
+
+## v10.5 — official detail reconciliation
+- Added credential-safe **single-precedent detail collection** using the official `target=prec` detail endpoint contract.
+- `jaisl-precedent-detail` stores raw detail response + canonical SHA-256 without persisting `LAW_OC`.
+- `jaisl-reconcile` compares the frozen discovery identity against official detail before enrichment.
+- Case-number/title/precedent-ID mismatches are routed to `IDENTITY_REVIEW_REQUIRED`; they are never silently merged.
+- Only reconciled matching detail can become `VERIFIED_DETAIL_READY`, with both raw-response hash and normalized-case hash preserved.
+- Current real-data state remains **0/30 verified** until the credential-backed detail commands are actually run.
+- See [v10.5 detail reconciliation](docs/V10_5_DETAIL_RECONCILIATION.md).
