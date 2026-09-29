@@ -1,13 +1,13 @@
-"""v5.5 end-to-end verification review session.
+"""v6.0 end-to-end verification review session.
 
 This orchestrates evidence intake, frozen baselines, review planning, human review
 state, and packaging. Allowed actions are verification actions only.
 """
 from dataclasses import dataclass, field, asdict
-from datetime import datetime, timezone
 import hashlib
 import json
 import re
+from .audit_chain import append_event, validate_chain
 
 ALLOWED_ACTION_TYPES={
     "VERIFY_SOURCE",
@@ -38,12 +38,9 @@ class ReviewSession:
     audit_log:list[dict]=field(default_factory=list)
     human_disposition:str|None=None
 
-def _now():
-    return datetime.now(timezone.utc).isoformat()
-
 def _hash(value):
     return hashlib.sha256(
-        json.dumps(value,sort_keys=True,separators=(",",":"),ensure_ascii=False).encode()
+        json.dumps(value,sort_keys=True,separators=(",",":"),ensure_ascii=False,allow_nan=False).encode()
     ).hexdigest()
 
 def validate_action(action:ReviewActionContract):
@@ -62,14 +59,14 @@ def create_session(*,session_id,baseline_hash,open_findings=()):
         raise ValueError("baseline hash must be lowercase SHA256")
     findings=list(dict.fromkeys(open_findings))
     s=ReviewSession(session_id.strip(),baseline_hash,open_findings=findings)
-    s.audit_log.append({"event":"SESSION_CREATED","at":_now(),"open_findings":list(findings)})
+    append_event(s.audit_log,"SESSION_CREATED",data={"open_findings":list(findings)})
     return s
 
 def freeze_session(session):
     if session.state!="COLLECTED":
         raise ValueError("session can only be frozen from COLLECTED")
     session.state="FROZEN"
-    session.audit_log.append({"event":"SESSION_FROZEN","at":_now(),"baseline_hash":session.baseline_hash})
+    append_event(session.audit_log,"SESSION_FROZEN",data={"baseline_hash":session.baseline_hash})
     return session
 
 def add_review_action(session,action:ReviewActionContract):
@@ -80,7 +77,7 @@ def add_review_action(session,action:ReviewActionContract):
         raise ValueError("duplicate action id")
     session.actions.append(asdict(action))
     session.state="REVIEW_PENDING"
-    session.audit_log.append({"event":"REVIEW_ACTION_ADDED","at":_now(),"action_id":action.action_id})
+    append_event(session.audit_log,"REVIEW_ACTION_ADDED",data={"action_id":action.action_id})
     return session
 
 def record_human_review(session,*,disposition,resolved_findings=()):
@@ -95,9 +92,7 @@ def record_human_review(session,*,disposition,resolved_findings=()):
     session.open_findings=[x for x in session.open_findings if x not in resolved]
     session.human_disposition=disposition.strip()
     session.state="REVIEWED"
-    session.audit_log.append({
-        "event":"HUMAN_REVIEW_RECORDED",
-        "at":_now(),
+    append_event(session.audit_log,"HUMAN_REVIEW_RECORDED",data={
         "resolved_findings":sorted(resolved),
         "remaining_findings":list(session.open_findings),
     })
@@ -106,6 +101,7 @@ def record_human_review(session,*,disposition,resolved_findings=()):
 def package_session(session):
     if session.state!="REVIEWED":
         raise ValueError("only reviewed sessions can be packaged")
+    chain_status=validate_chain(session.audit_log)
     payload={
         "session_id":session.session_id,
         "baseline_hash":session.baseline_hash,
@@ -113,15 +109,16 @@ def package_session(session):
         "actions":[dict(x) for x in session.actions],
         "human_disposition":session.human_disposition,
         "audit_log":[dict(x) for x in session.audit_log],
+        "audit_chain_head":chain_status["head_hash"],
     }
     package_hash=_hash(payload)
-    package_event={"event":"SESSION_PACKAGED","at":_now(),"package_hash":package_hash}
+    package_event=append_event(session.audit_log,"SESSION_PACKAGED",data={"package_hash":package_hash})
     session.state="PACKAGED"
-    session.audit_log.append(package_event)
     return {
         "package_hash":package_hash,
         "state":session.state,
         "payload":payload,
         "package_event":package_event,
+        "audit_chain":validate_chain(session.audit_log),
         "note":"Package records a human review process; it is not a legal judgment.",
     }
