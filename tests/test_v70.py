@@ -3,7 +3,8 @@ from judicial_ai_safety_lab.precedent_connector import precedent_search_url,prec
 from judicial_ai_safety_lab.real_data_protocol import build_real_data_manifest,verify_real_data_manifest
 from judicial_ai_safety_lab.expert_eval import ExpertRating,summarize_ratings,pairwise_exact_agreement
 
-def test_precedent_urls_require_credential_and_pin_target():
+def test_precedent_urls_require_credential_and_pin_target(monkeypatch):
+    monkeypatch.delenv("LAW_OC",raising=False)
     with pytest.raises(ValueError): precedent_search_url("손해배상",oc=None)
     u=precedent_search_url("손해배상",oc="demo",display=10,page=2,org="400201")
     assert "target=prec" in u and "type=JSON" in u and "display=10" in u and "page=2" in u
