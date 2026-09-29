@@ -1,4 +1,4 @@
-# Judicial AI Safety Lab v11.0
+# Judicial AI Safety Lab v11.5
 
 대한민국 사법·법률 분야 생성형 AI를 **위험평가 → 동일조건 검증 → 적대적 테스트 → 독립검증 → 법적 근거 변경감지 → 지속 모니터링 → 인간검토** 순서로 점검하는 연구용 PoC입니다.
 
@@ -241,3 +241,12 @@ External audit request files:
 - See [v11 batch detail pipeline](docs/V11_BATCH_DETAIL_PIPELINE.md).
 
 - Latest verified GitHub Actions JUnit evidence for v11.0: **123/123 PASS**, 0 failures, 0 errors.
+
+
+## v11.5 — fail-closed real-data pilot preflight
+- Added `jaisl-preflight` to block the real-data run until every frozen cohort source has verified official detail evidence.
+- The gate rejects missing/extra sources, pending details, identity-review cases and unknown evidence states.
+- `ready_for_expert_packet` intentionally remains false even when all 30 details are verified, because expert packets require later frozen JAISL outputs.
+- This separates **software readiness**, **evidence readiness**, and **expert-review readiness** as distinct states.
+- Current truthful state without a LAW_OC-backed run remains **0 verified / 30 pending / preflight not ready**.
+- See [v11.5 pilot preflight](docs/V11_5_PILOT_PREFLIGHT.md).
