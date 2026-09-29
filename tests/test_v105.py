@@ -60,3 +60,30 @@ def test_detail_envelope_rejects_wrong_precedent_identity():
       "PrecService":{"판례정보일련번호":"999","사건번호":"2026다123","사건명":"손해배상(기)"}})
     with pytest.raises(ValueError,match="precedent identity mismatch"):
         verify_detail_envelope(env)
+
+
+def test_reconcile_accepts_official_trailing_bracket_annotation():
+    discovery=dict(DISCOVERY,title="손해배상(기)")
+    env=collect_precedent_detail("123",oc="x",fetcher=lambda url:{
+      "PrecService":{"판례정보일련번호":"123","사건번호":"2026다123",
+                     "사건명":"손해배상(기)[쟁점 설명]","판시사항":"쟁점","판결요지":"요지"}})
+    r=reconcile_case(discovery,case_id="JAISL-D001",detail_envelope=env)
+    assert r["status"]=="VERIFIED_DETAIL_READY"
+    assert r["title_equivalence"]=="OFFICIAL_TRAILING_ANNOTATION"
+
+def test_reconcile_accepts_discovery_etc_prefix_only_when_literal_prefix():
+    discovery=dict(DISCOVERY,title="사기·업무상배임 등",case_number="2026도123")
+    env=collect_precedent_detail("123",oc="x",fetcher=lambda url:{
+      "PrecService":{"판례정보일련번호":"123","사건번호":"2026도123",
+                     "사건명":"사기·업무상배임·횡령·사문서위조","판시사항":"쟁점","판결요지":"요지"}})
+    r=reconcile_case(discovery,case_id="JAISL-D001",detail_envelope=env)
+    assert r["status"]=="VERIFIED_DETAIL_READY"
+    assert r["title_equivalence"]=="DISCOVERY_ETC_PREFIX"
+
+def test_reconcile_does_not_overaccept_nonprefix_etc_title():
+    discovery=dict(DISCOVERY,title="사기·업무상배임 등",case_number="2026도123")
+    env=collect_precedent_detail("123",oc="x",fetcher=lambda url:{
+      "PrecService":{"판례정보일련번호":"123","사건번호":"2026도123",
+                     "사건명":"횡령·사기·업무상배임","판시사항":"쟁점","판결요지":"요지"}})
+    r=reconcile_case(discovery,case_id="JAISL-D001",detail_envelope=env)
+    assert r["status"]=="IDENTITY_REVIEW_REQUIRED"
