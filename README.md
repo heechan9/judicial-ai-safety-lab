@@ -1,4 +1,4 @@
-# Judicial AI Safety Lab v11.5
+# Judicial AI Safety Lab v12.0
 
 대한민국 사법·법률 분야 생성형 AI를 **위험평가 → 동일조건 검증 → 적대적 테스트 → 독립검증 → 법적 근거 변경감지 → 지속 모니터링 → 인간검토** 순서로 점검하는 연구용 PoC입니다.
 
@@ -252,3 +252,11 @@ External audit request files:
 - See [v11.5 pilot preflight](docs/V11_5_PILOT_PREFLIGHT.md).
 
 - Latest verified GitHub Actions JUnit evidence for v11.5: **127/127 PASS**, 0 failures, 0 errors.
+
+
+## v12.0 — fail-closed official detail payload validation
+- A live PC run exposed a real validation gap: an invalid placeholder `LAW_OC` produced API error objects shaped like `{result, msg}`, which the earlier collector hashed and counted as collected evidence.
+- v12.0 now rejects any detail response that does not contain exactly one precedent-detail object with `판례정보일련번호` plus case identity fields.
+- The returned precedent ID must exactly match the requested `prec_seq`; mismatches fail closed.
+- API error/empty/non-detail payloads are now recorded as `FAILED`, never `COLLECTED`.
+- Evidence generated before this fix with an invalid credential must be discarded and recollected with a real `LAW_OC`.
