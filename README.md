@@ -1,4 +1,4 @@
-# Judicial AI Safety Lab v13.0
+# Judicial AI Safety Lab v13.5
 
 대한민국 사법·법률 분야 생성형 AI를 **위험평가 → 동일조건 검증 → 적대적 테스트 → 독립검증 → 법적 근거 변경감지 → 지속 모니터링 → 인간검토** 순서로 점검하는 연구용 PoC입니다.
 
@@ -278,3 +278,14 @@ External audit request files:
 - Jules and Claude v13 audit requests are prepared and pinned to the same code target, but are **not** marked complete without saved reviewable results.
 - Current next boundary: generate `real-assessment-v1.json` on the live PC evidence, then generate the blinded expert packet and begin independent expert review.
 - See [v13 real-data status](docs/V13_REAL_DATA_STATUS.md).
+
+
+## v13.5 — expert-review completion controls
+- The frozen real-data assessment remains tied to v13.0 target commit `3de937f3833e08c3e0c141444ae71fcbf9fc5148`.
+- The saved 30-case evidence index and v13 hash contract reproduce assessment hash `4ee3e039c35d1a9d49ba8496d3a81be514df414ec8c4514fe3a81d7abb324ab2` and blinded packet hash `ad6a033eee9d26a3633695901475f7b19a76b64a9be675dd3b762533b277fe27`.
+- `jaisl-expert-rating-template` generates blank reviewer worksheets tied to the frozen packet; it never pre-fills scores.
+- `jaisl-expert-review-gate` requires at least two independent reviewers, complete per-case coverage, no duplicate reviewer/case ratings, and adjudication of critical errors before `ready_to_summarize=true`.
+- Expert review coordination is tracked in GitHub issue #3; the issue itself does not count as completed review.
+- OpenAI's v13.5 internal audit records the previous expert-coverage gap as fixed and keeps external Jules/Claude audits explicitly pending.
+- Verified v13.5 GitHub Actions JUnit evidence: **142/142 PASS**, 0 failures, 0 errors, 0 skipped.
+- See [expert-review protocol](docs/EXPERT_REVIEW_PROTOCOL_V135.md) and [OpenAI internal audit](docs/audits/OPENAI_CODE_AUDIT_V135.md).
