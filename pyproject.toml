@@ -35,6 +35,7 @@ jaisl-expert-rating-template="judicial_ai_safety_lab.expert_rating_template_cli:
 jaisl-expert-review-gate="judicial_ai_safety_lab.expert_review_gate_cli:main"
 jaisl-expert-reliability="judicial_ai_safety_lab.expert_reliability_cli:main"
 jaisl-expert-adjudication="judicial_ai_safety_lab.expert_adjudication_cli:main"
+jaisl-assessment-replay="judicial_ai_safety_lab.assessment_replay_cli:main"
 [tool.pytest.ini_options]
 pythonpath=["src"]
 testpaths=["tests"]

@@ -4,6 +4,15 @@
 
 > **Research prototype only.** 공식 법원 시스템, 법률판단 도구 또는 인증 제품이 아닙니다.
 
+
+## 사건별 재실행 비교 보강 (2026-10-22)
+
+병커시유·적대적 AI·TriGuard·FabGuard의 최신 검증 구현을 검토하여 `jaisl-assessment-replay`를 추가했습니다. 두 고정 평가 파일에서 사건 누락·근거 변경·같은 입력의 출력 변경을 구분하고 재검증 대상 사건을 기록합니다. 출력 내용이 달라져도 기존 v13 입력 해시가 같을 수 있는 한계를 별도 비교로 보완합니다.
+
+- 기존 30건 고정 결과와 전문가 패킷은 유지합니다.
+- 비교 일치는 법률적 정확성 또는 독립 전문가 평가 완료를 뜻하지 않습니다.
+- [설계 출처·실행 명령·결과 해석](docs/CROSS_PROJECT_REPLAY.md)
+
 ## 프로젝트 방법론
 - **TriGuard AI** — Risk/Source Inventory, source/status inspection
 - **Bunkering AI** — baseline-vs-AI, stress scenarios, evaluation contract/replay
