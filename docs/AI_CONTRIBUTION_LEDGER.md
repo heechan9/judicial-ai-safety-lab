@@ -42,3 +42,9 @@ We do **not** fabricate GitHub identities, email addresses, or completed reviews
 
 | v13.5 | Expert rating templates, fail-closed expert-review completion gate, 142-test CI verification, v13 assessment/packet fingerprint recomputation, internal audit | — | — | Expert review coordination open; actual ratings and external audits still pending |
 | v14.0 | Ordinal expert reliability metric, additive critical-error adjudication, paper evidence matrix, status reconciliation | — | — | Actual expert ratings and external audit results remain pending |
+
+## 2026-10-22 — cross-project assessment replay
+- User request: apply useful improvements from the other ongoing projects to JAISL.
+- Codex inspected current Bunkering AI, AdversarialAI Security, TriGuard AI and FabGuard AI implementations, then independently implemented the frozen-assessment comparison CLI.
+- Added strict input validation, full-artifact fingerprints, case-level input/output change classification and a retest list. Source commits and limitations: `docs/CROSS_PROJECT_REPLAY.md`.
+- Validation: 161 tests passed locally on Python 3.12 (147 existing + 14 new); no real pilot rerun or independent expert review performed.
